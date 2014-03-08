@@ -2,64 +2,66 @@
 
 ###Credits:
 
-**Clover** is courtesy of **slice, dmazar, apianti, pene et al**
+**- Clover** is courtesy of **slice, dmazar, apianti, pene et al**
+
 [The original discussion thread](http://www.insanelymac.com/forum/topic/284656-clover-general-discussion/)  
+
 [Official Clover web page](http://sourceforge.net/projects/cloverefiboot/)
 
 **Extensions:**
 
-**VoodooPS2Controller** is courtesy of **RehabMan**
+**- VoodooPS2Controller** is courtesy of **RehabMan**
 
 [The VoodooPS2Controller support thread](http://www.tonymacx86.com/mavericks-laptop-support/87182-new-voodoops2controller-keyboard-trackpad-clickpad-support.html)
 
-**ACPIBacklight** is courtesy of **RehabMan**
+**- ACPIBacklight** is courtesy of **RehabMan**
 
 [The ACPIBacklight support thread](http://www.tonymacx86.com/hp-probook-mavericks/118805-full-range-brightness-using-acpibacklight.html)
 
 [The original support thread](http://www.insanelymac.com/forum/topic/268219-acpi-backlight-driver/)
 
-**ACPIBatteryManager** is courtesy of **RehabMan**
+**- ACPIBatteryManager** is courtesy of **RehabMan**
 
 [The ACPIBatteryManager support thread](http://www.tonymacx86.com/mountain-lion-laptop-support/69472-battery-manager-fix-boot-without-batteries.html)
 
 [The original support thread](http://www.insanelymac.com/forum/topic/264597-hp-dvx-acpi-3x4x-battery-driver-106107/#entry1729132)
 
-**RealtekRTL8111 & RealtekRTL8100** are courtesy of **Mieze**
+**- RealtekRTL8111 & RealtekRTL8100** are courtesy of **Mieze**
 
 [The original RealtekRTL8111.kext support thread](http://www.insanelymac.com/forum/topic/287161-new-driver-for-realtek-rtl8111/)
 
 [The original RealtekRTL8100.kext support thread](http://www.insanelymac.com/forum/topic/296190-driver-for-realteks-rtl810x-fast-ethernet-series/)
 
-**HWSensors and FakeSMC** are courtesy of **kozlek, netkas, slice, navi**
+**- HWSensors and FakeSMC** are courtesy of **kozlek, netkas, slice, navi**
 
 [Official HWSensors web page](http://hwsensors.com/)
 
 [The original support thread](http://www.insanelymac.com/forum/topic/275429-hwsensors/)
 
-**CodecCommander** is courtesy of **Dolnor**
+**- CodecCommander** is courtesy of **Dolnor**
 
 [The original support thread](http://applelife.ru/threads/eapd-codec-commander.41696/)
 
-**BTFirmwareUploader** is courtesy of **EMlyDinEsH**
+**- BTFirmwareUploader** is courtesy of **EMlyDinEsH**
 
 [The original support thread](http://forum.osxlatitude.com/index.php?/topic/2925-bluetooth-firmware-uploader/)
 
 
 **Applications:**
 
-**Kext Utility** is courtesy of **cVaD**
+**- Kext Utility** is courtesy of **cVaD**
 
 [The original support thread](http://www.insanelymac.com/forum/topic/140647-latest-kext-utility-mavericks-super-speed-edition/)
 
-**unpkg** is courtesy of **timdoug**
+**- unpkg** is courtesy of **timdoug**
 
 [Official web page](http://www.timdoug.com/unpkg/)
 
-**ShowHiddenFiles** is courtesy of **Jamesst20**
+**- ShowHiddenFiles** is courtesy of **Jamesst20**
 
 [The original support thread](http://www.insanelymac.com/forum/topic/268663-new-showhiddenfiles-by-jamesst20/)
 
-**iGlasses Demo** is courtesy of **ecamm.com**
+**- iGlasses Demo** is courtesy of **ecamm.com**
 
 [Official web page](http://www.ecamm.com/mac/iglasses/)
 
