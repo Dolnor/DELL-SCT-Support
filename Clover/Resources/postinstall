@@ -1,0 +1,9 @@
+#!/bin/bash
+
+## copy clover main portion to ESP
+efi=$( df | grep EFI | sed -nE 's/.*% +([-A-F0-9]+)*/\1/p' )
+
+cp -R "${3}/tmp/EFI" "${efi}"
+
+
+exit 0

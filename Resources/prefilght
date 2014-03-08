@@ -1,0 +1,19 @@
+#!/bin/bash
+
+## mount efi partition
+efi_disk=$( df / | sed -n '2p' | awk '{print $1}' )
+efi="${efi_disk%s*}s1"
+efi_mp="/Volumes/EFI"
+efi_chk=$( df | grep EFI | sed -nE 's/.*% +([-A-F0-9]+)*/\1/p' )
+
+	if [ -e $efi_mp ]
+	then
+			fsck_msdos $efi
+            mount_msdos $efi $efi_mp > /dev/null
+	 else
+			fsck_msdos $efi
+            mkdir $efi_mp
+           	mount_msdos $efi $efi_mp > /dev/null
+	 fi
+
+exit 0

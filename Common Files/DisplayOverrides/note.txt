@@ -1,0 +1,3 @@
+- AUO GP84R  - [6af:183c]  (produced late 2009)
+- LGD 9DMK2  - [30e4:2e9] (produced early 2010) <— missing proper DisplayOverride
+- CMO KJ303   - [daf:1464]  (produced early 2011)

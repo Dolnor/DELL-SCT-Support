@@ -1,0 +1,73 @@
+#!/bin/bash
+
+sle="${3}/System/Library/Extensions"
+
+# rebilding kernelcache
+touch "${sle}"
+
+## generate serail numbers
+efi=$( df | grep EFI | sed -nE 's/.*% +([-A-F0-9]+)*/\1/p' )
+config="${efi}/EFI/CLOVER/config.plist"
+backup="${3}/tmp/temp.plist"
+
+    if [ -e $backup ]
+    then
+        serial=$( /usr/libexec/PlistBuddy -c "Print SMBIOS:SerialNumber" ${backup} )
+        boardserial=$( /usr/libexec/PlistBuddy -c "Print SMBIOS:BoardSerialNumber" ${backup} )
+    else
+        week=CDFGHJKLMNPQRTVWXY12345678
+        chars=ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890
+        week_letter=`echo ${week:$(($RANDOM%${#week})):1}`
+        function random_char { echo ${chars:$(($RANDOM%${#chars})):1}; }
+        serial="SG2F"$week_letter$(random_char)$(random_char)$(random_char)"DH2L"
+        boardserial="SG2F"$week_letter$(random_char)$(random_char)$(random_char)$(random_char)$(random_char)$(random_char)$(random_char)$(random_char)"DH2L"
+    fi
+
+/usr/libexec/PlistBuddy -c "Set SMBIOS:SerialNumber $serial" ${config}
+/usr/libexec/PlistBuddy -c "Set SMBIOS:BoardSerialNumber $boardserial" ${config}
+/usr/libexec/PlistBuddy -c "Set RtVariables:MLB $boardserial" ${config}
+
+## copy network kexts to ESP
+if [ -r "${sle}/RealtekRTL8111.kext" ];
+then
+    cp -Rf "${sle}/RealtekRTL8111.kext" "${efi}/EFI/CLOVER/kexts/10.9/RealtekRTL8111.kext"
+fi
+
+if [ -r "${sle}/RealtekRTL8100.kext" ];
+then
+    cp -Rf "${sle}/RealtekRTL8100.kext" "${efi}/EFI/CLOVER/kexts/10.9/RealtekRTL8100.kext"
+fi
+
+## compile and copy ACPI tables to ESP
+if [ -r "${3}/tmp/ACPI" ];
+then
+    ${3}/tmp/ACPI/iasl ${3}/tmp/ACPI/*.dsl
+
+    acpi="${efi}/EFI/CLOVER/ACPI/patched/"
+   #cp "${3}/tmp/ACPI/DSDT.aml"   "${acpi}"
+    cp "${3}/tmp/ACPI/SSDT-1.aml" "${acpi}"
+    cp "${3}/tmp/ACPI/SSDT-2.aml" "${acpi}"
+    cp "${3}/tmp/ACPI/SSDT-3.aml" "${acpi}"
+fi
+
+## unmount EFI System partition
+efi_disk=$( df / | sed -n '2p' | awk '{print $1}' )
+efi_mp="/Volumes/EFI"
+
+	if [ "$efi_mp" = "$efi" ]
+	then
+			diskutil umount $efi_mp
+    fi
+
+## delete temp files used during installation
+rm -R "${3}/tmp/EFI"
+rm -R "${3}/tmp/ACPI"
+rm -R "${3}/tmp/App"
+
+## delete temp plist
+if [ -e $backup ]
+then
+    rm ${backup}
+fi
+
+exit 0

@@ -1,0 +1,13 @@
+/System/Library/Extensions/ACPIBacklight.kext
+/System/Library/Extensions/ACPIBatteryManager.kext
+/System/Library/Extensions/ACPISensors.kext
+/System/Library/Extensions/CodecCommander.kext
+/System/Library/Extensions/CPUSensors.kext
+/System/Library/Extensions/FakeSMC.kext
+/System/Library/Extensions/VoodooPS2Controller.kext
+/System/Library/Extensions/IOWMIFamily.kext
+/System/Library/Extensions/RealtekRTL8100.kext
+/System/Library/Extensions/RealtekRTL8111.kext
+/System/Library/Extensions/CustomPeripheral.kext
+/System/Library/Extensions/AWNB290.kext
+/System/Library/Extensions/BTFirmwareUploader.kext

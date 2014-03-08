@@ -1,0 +1,13 @@
+#!/bin/bash
+
+## remove custom HDA resources (if any) before installing new ones
+hda_rsrc1="${3}/System/Library/Extensions/AppleHDA.kext/Contents/Resources/layout28.aml.zlib"
+hda_rsrc2="${3}/System/Library/Extensions/AppleHDA.kext/Contents/Resources/Platforms.aml.zlib"
+
+if [[ -e ${hda_rsrc1} && -e ${hda_rsrc1} ]]
+then
+    rm ${hda_rsrc1}
+    rm ${hda_rsrc2}
+fi
+
+sh ./backup.sh ./list ${3}

@@ -1,0 +1,28 @@
+#!/bin/bash
+
+##  determine efi partition
+efi=$( df | grep EFI | sed -nE 's/.*% +([-A-F0-9]+)*/\1/p' )
+
+## remove old temp.plist if exists
+sbackup="${3}/tmp/temp.plist"
+if [ -e $sbackup ]
+then
+    rm "${sbackup}"
+fi
+
+## backup user system and board serials
+config="${efi}/EFI/CLOVER/config.plist"
+
+if [ -e $config ];
+then
+    serial=$( /usr/libexec/PlistBuddy -c "Print SMBIOS:SerialNumber" ${config} )
+    boardserial=$( /usr/libexec/PlistBuddy -c "Print SMBIOS:BoardSerialNumber" ${config} )
+
+    /usr/libexec/PlistBuddy -c "Add SMBIOS:SerialNumber string $serial" ${sbackup}
+    /usr/libexec/PlistBuddy -c "Add SMBIOS:BoardSerialNumber string $boardserial" ${sbackup}
+fi
+
+## call support script to backup clover acpi tables and config for the day
+sh ./clover-backup.sh
+
+exit 0

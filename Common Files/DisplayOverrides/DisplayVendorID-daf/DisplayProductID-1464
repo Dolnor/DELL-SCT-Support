@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>DisplayProductID</key>
+	<integer>5220</integer>
+	<key>DisplayProductName</key>
+	<string>Color LCD</string>
+	<key>DisplayVendorID</key>
+	<integer>44813</integer>
+	<key>IODisplayEDID</key>
+	<data>AP///////wANr2QUAAAAAAgVAQSQHhF4AgzFlltSkikkUFQAAAABAQEBAQEBAQEBAQEBAQEBvBtWhFAAFjAwIBQANa4QAAAatxJWklAAGDA0IxQANa4QAAAaAAAA/gBLSjMwM4AxNDBCR0UKAAAAAAAAQTGUAAAAAAEBCiAgAO8=</data>
+	<key>dspc</key>
+	<array>
+		<data>FSFWqFEAGzBFjxMAAAAAAAAa</data>
+	</array>
+</dict>
+</plist>
