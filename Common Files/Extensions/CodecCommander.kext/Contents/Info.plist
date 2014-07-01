@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>13C53</string>
+	<string>13E28</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
@@ -55,8 +55,30 @@
 		<dict>
 			<key>CFBundleIdentifier</key>
 			<string>org.tw.CodecCommander</string>
-			<key>Configuration</key>
+			<key>IOClass</key>
+			<string>CodecCommander</string>
+			<key>IOMatchCategory</key>
+			<string>CodecCommander</string>
+			<key>IOProviderClass</key>
+			<string>IOResources</string>
+			<key>IOResourceMatch</key>
+			<string>IOKit</string>
+			<key>Platform Profile</key>
 			<dict>
+				<key>ASUS</key>
+				<dict>
+					<key>1201N</key>
+					<dict>
+						<key>HDEF Device Location</key>
+						<string>8</string>
+						<key>Simulate Headphones</key>
+						<integer>0</integer>
+						<key>Stream Delay</key>
+						<integer>700</integer>
+						<key>Update Headphone Node</key>
+						<integer>21</integer>
+					</dict>
+				</dict>
 				<key>Default</key>
 				<dict>
 					<key>Check Infinitely</key>
@@ -69,24 +91,20 @@
 					<integer>1</integer>
 					<key>Generate Stream</key>
 					<true/>
+					<key>HDEF Device Location</key>
+					<string>1B</string>
 					<key>Simulate Headphones</key>
 					<integer>33</integer>
 					<key>Stream Delay</key>
 					<integer>500</integer>
+					<key>Update Extra Node</key>
+					<string>0</string>
 					<key>Update Headphone Node</key>
 					<integer>0</integer>
 					<key>Update Speaker Node</key>
 					<integer>20</integer>
 				</dict>
 			</dict>
-			<key>IOClass</key>
-			<string>CodecCommander</string>
-			<key>IOMatchCategory</key>
-			<string>CodecCommander</string>
-			<key>IOProviderClass</key>
-			<string>IOResources</string>
-			<key>IOResourceMatch</key>
-			<string>IOKit</string>
 		</dict>
 	</dict>
 	<key>NSHumanReadableCopyright</key>

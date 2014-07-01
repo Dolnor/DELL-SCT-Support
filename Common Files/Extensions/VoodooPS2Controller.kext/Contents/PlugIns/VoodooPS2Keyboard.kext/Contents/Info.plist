@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>13C64</string>
+	<string>13E28</string>
 	<key>CFBundleExecutable</key>
 	<string>VoodooPS2Keyboard</string>
 	<key>CFBundleGetInfoString</key>
-	<string>1.8.11, Copyright Apple Computer, Inc. 2000-2003, RehabMan 2012-2013</string>
+	<string>1.8.13, Copyright Apple Computer, Inc. 2000-2003, RehabMan 2012-2013</string>
 	<key>CFBundleIdentifier</key>
 	<string>org.rehabman.voodoo.driver.PS2Keyboard</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -21,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.8.11</string>
+	<string>1.8.13</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
@@ -48,6 +48,16 @@
 			<string>ApplePS2KeyboardDevice</string>
 			<key>Platform Profile</key>
 			<dict>
+				<key>ASUS</key>
+				<dict>
+					<key>1201N</key>
+					<dict>
+						<key>ActionSwipeDown</key>
+						<string>63 d, 63 u</string>
+						<key>ActionSwipeUp</key>
+						<string>61 d, 61 u</string>
+					</dict>
+				</dict>
 				<key>DELL</key>
 				<dict>
 					<key>Dell-Keys</key>
@@ -127,7 +137,7 @@
 						<key>Breakless PS2</key>
 						<array>
 							<string>e01e;Touchpad Fn+f3 is breakless</string>
-							<string>e06e;Vidmirror Fn+f1 macro is breakless</string>
+							<string>e06e;REVIEW: temporary for case that macro inversion doesn't work...</string>
 						</array>
 						<key>Custom ADB Map</key>
 						<array>
@@ -146,7 +156,7 @@
 							<string>;The following 12 items map Fn+fkeys to fkeys</string>
 							<string>e06e=3b</string>
 							<string>e008=3c</string>
-							<string>e01e=3d;</string>
+							<string>e01e=3d</string>
 							<string>e005=3e</string>
 							<string>e006=3f</string>
 							<string>e00c=40</string>
@@ -173,7 +183,7 @@
 						<key>Function Keys Standard</key>
 						<array>
 							<string>;The following 12 items map Fn+fkeys to Fn+fkeys</string>
-							<string>e06e=e06e;Fn+f1 macro produces win+p keystrokes</string>
+							<string>e06e=e06e;Fn+f1 macro translated</string>
 							<string>e008=e008;Fn+f2 regular scancode and EC query call q8c</string>
 							<string>e01e=e037;Fn+f3 regular scancode and EC controls LED</string>
 							<string>e005=e005;Fn+f4 no ps2scancode and EC query call q81</string>
@@ -205,11 +215,17 @@
 							<string>;This section maps ps2 codes (packet format) received quickly (macros) into fake ps2 codes (packet format)</string>
 							<string>;Fn+F1</string>
 							<data>
-							//8CWwEZAm4=
+							//8CbgAAAAACWwEZ
+							</data>
+							<data>
+							//8C7gAAAAAC2wGZ
+							</data>
+							<data>
+							//8C7gAAAAABmQLb
 							</data>
 						</array>
 						<key>MaximumMacroTime</key>
-						<integer>25000000</integer>
+						<integer>35000000</integer>
 						<key>Note-Author</key>
 						<string>TimeWalker aka TimeWalker75a</string>
 						<key>Note-Comment</key>
@@ -310,6 +326,10 @@
 					<string>ProBook-102;ProBook 4440s</string>
 					<key>17F6</key>
 					<string>ProBook-102;ProBook 4540s</string>
+					<key>1942</key>
+					<string>ProBook-87;ProBook 450s G1</string>
+					<key>1949</key>
+					<string>ProBook-87;ProBook 450s G1</string>
 					<key>1962</key>
 					<string>Haswell-Envy;HP Envy 15-j063cl</string>
 					<key>1963</key>
@@ -318,6 +338,8 @@
 					<string>Haswell-Envy;HP Envy 17t-j100</string>
 					<key>1966</key>
 					<string>Haswell-Envy;HP Envy 17t-j000</string>
+					<key>198F</key>
+					<string>ProBook-87;ProBook 450s G0</string>
 					<key>Haswell-Envy</key>
 					<dict>
 						<key>BrightnessHack</key>
@@ -540,13 +562,22 @@
 				<dict>
 					<key>Haswell-Ideapad</key>
 					<dict>
+						<key>Breakless PS2</key>
+						<array>
+							<string>e065</string>
+							<string>e068</string>
+							<string>e027</string>
+						</array>
 						<key>Custom ADB Map</key>
 						<array>
 							<string>e063=3f;Apple Fn</string>
-							<string>e0f2=65;special F9</string>
-							<string>e0f3=91;brightness down</string>
-							<string>e0f4=90;brightness up</string>
-							<string>e06d=70;video mirror</string>
+							<string>e064=6b;F14</string>
+							<string>e065=71;F15</string>
+							<string>e068=4f;F18</string>
+							<string>e0f9=65;special F9</string>
+							<string>e0fb=91;brightness down</string>
+							<string>e0fc=90;brightness up</string>
+							<string>e06a=70;video mirror</string>
 						</array>
 						<key>Custom PS2 Map</key>
 						<array>
@@ -558,15 +589,15 @@
 							<string>e020=e020</string>
 							<string>e02e=e02e</string>
 							<string>e030=e030</string>
-							<string>e06e=e06e</string>
-							<string>;F5</string>
-							<string>e00b=e037</string>
-							<string>e00c=e00c</string>
-							<string>e06f=e06f</string>
-							<string>e007=e0f0</string>
-							<string>e06d=e06d</string>
-							<string>e005=e0f3</string>
-							<string>e006=e0f4</string>
+							<string>e064=e064</string>
+							<string>e065=e065</string>
+							<string>e066=e037</string>
+							<string>e067=e067</string>
+							<string>e068=e068</string>
+							<string>e069=e0f0</string>
+							<string>e06a=e06a</string>
+							<string>e06b=e0fb</string>
+							<string>e06c=e0fc</string>
 							<string>;The following 12 items map fkeys to fkeys</string>
 							<string>3b=3b</string>
 							<string>3c=3c</string>
@@ -587,57 +618,78 @@
 							<string>e020=3b</string>
 							<string>e02e=3c</string>
 							<string>e030=3d</string>
-							<string>e06e=3e</string>
-							<string>;F5=3f</string>
-							<string>e00b=40</string>
-							<string>e00c=41</string>
-							<string>e06f=42</string>
-							<string>e007=e0f2</string>
-							<string>e06d=44</string>
-							<string>e005=57</string>
-							<string>e006=58</string>
+							<string>e064=3e</string>
+							<string>e065=3f</string>
+							<string>e066=40</string>
+							<string>e067=41</string>
+							<string>e068=42</string>
+							<string>e069=e0f2</string>
+							<string>e06a=44</string>
+							<string>e06b=57</string>
+							<string>e06c=58</string>
 							<string>;The following 12 items map fkeys to Fn+fkeys</string>
 							<string>3b=e020</string>
 							<string>3c=e02e</string>
 							<string>3d=e030</string>
-							<string>3e=e06e</string>
-							<string>;F5=3f</string>
+							<string>3e=e064</string>
+							<string>3f=e065</string>
 							<string>40=e037</string>
-							<string>41=e00c</string>
-							<string>42=e06f</string>
+							<string>41=e067</string>
+							<string>42=e068</string>
 							<string>43=e0f1</string>
-							<string>44=e06d</string>
-							<string>57=e0f3</string>
-							<string>58=e0f4</string>
+							<string>44=e06a</string>
+							<string>57=e0fb</string>
+							<string>58=e0fc</string>
 						</array>
 						<key>Macro Inversion</key>
 						<array>
 							<string>;This section maps ps2 codes (packet format) received quickly (macros) into fake ps2 codes (packet format)</string>
 							<string>;Fn+F4</string>
 							<data>
-							//8BOAE+Am4=
+							//8CZAAAAAABOAE+
 							</data>
 							<data>
-							//8BvgG4Au4=
+							//8C5AAAAAABvgG4
+							</data>
+							<string>;F5 (without Fn)</string>
+							<data>
+							//8CZQEAAAABPw==
+							</data>
+							<data>
+							//8C5QEAAAABvw==
+							</data>
+							<string>;Fn+Ctrl+F6</string>
+							<data>
+							//8CJwAD//8CZg==
+							</data>
+							<data>
+							//8CpwAD//8C5g==
+							</data>
+							<string>;Ctrl+F6</string>
+							<data>
+							//8CJwAD//8CQA==
+							</data>
+							<data>
+							//8CpwAD//8CwA==
 							</data>
 							<string>;Fn+F8</string>
 							<data>
-							//8CHQE4AQ8Cbw==
+							//8CaAAAAAACHQE4AQ8=
 							</data>
 							<data>
-							//8BjwG4Ap0C7w==
+							//8C6AAAAAABjwG4Ap0=
 							</data>
 							<string>;Fn+F10</string>
 							<data>
-							//8CWwEZAm0=
+							//8CagAAAAACWwEZ
 							</data>
 							<data>
-							//8BmQLbAu0=
+							//8C6gAAAAABmQLb
 							</data>
 						</array>
 						<key>Macro Translation</key>
 						<array>
-							<string>;This section maps ps2codes (packet format) + modifiers to one more ps2 codes (packet format)</string>
+							<string>;This section maps ps2 codes (packet format) + modifiers to one more ps2 codes (packet format)</string>
 						</array>
 						<key>MaximumMacroTime</key>
 						<integer>25000000</integer>
@@ -663,7 +715,7 @@
 		<key>com.apple.kpi.unsupported</key>
 		<string>8.0.0</string>
 		<key>org.rehabman.voodoo.driver.PS2Controller</key>
-		<string>1.8.11</string>
+		<string>1.8.13</string>
 	</dict>
 	<key>OSBundleRequired</key>
 	<string>Console</string>

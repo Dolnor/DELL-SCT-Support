@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>13C64</string>
+	<string>13E28</string>
 	<key>CFBundleExecutable</key>
 	<string>VoodooPS2Trackpad</string>
 	<key>CFBundleGetInfoString</key>
-	<string>1.8.11, Copyright Apple Computer, Inc. 2002-2003, mackerintel 2008, RehabMan 2012-2013</string>
+	<string>1.8.13, Copyright Apple Computer, Inc. 2002-2003, mackerintel 2008, RehabMan 2012-2013</string>
 	<key>CFBundleIdentifier</key>
 	<string>org.rehabman.voodoo.driver.PS2Trackpad</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -21,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.8.11</string>
+	<string>1.8.13</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
@@ -81,11 +81,27 @@
 					<string>ProBook</string>
 					<key>17F6</key>
 					<string>ProBook</string>
+					<key>1942</key>
+					<string>ProBook</string>
+					<key>1949</key>
+					<string>ProBook</string>
+					<key>198F</key>
+					<string>ProBook</string>
 					<key>ProBook</key>
 					<dict>
 						<key>DisableDevice</key>
 						<true/>
 					</dict>
+				</dict>
+				<key>Lenovo</key>
+				<dict>
+					<key>Haswell-Ideapad</key>
+					<dict>
+						<key>DisableDevice</key>
+						<true/>
+					</dict>
+					<key>U430</key>
+					<string>Haswell-Ideapad</string>
 				</dict>
 			</dict>
 		</dict>
@@ -132,11 +148,27 @@
 					<string>ProBook</string>
 					<key>17F6</key>
 					<string>ProBook</string>
+					<key>1942</key>
+					<string>ProBook</string>
+					<key>1949</key>
+					<string>ProBook</string>
+					<key>198F</key>
+					<string>ProBook</string>
 					<key>ProBook</key>
 					<dict>
 						<key>DisableDevice</key>
 						<true/>
 					</dict>
+				</dict>
+				<key>Lenovo</key>
+				<dict>
+					<key>Haswell-Ideapad</key>
+					<dict>
+						<key>DisableDevice</key>
+						<true/>
+					</dict>
+					<key>U430</key>
+					<string>Haswell-Ideapad</string>
 				</dict>
 			</dict>
 		</dict>
@@ -208,6 +240,16 @@
 			<string>ApplePS2MouseDevice</string>
 			<key>Platform Profile</key>
 			<dict>
+				<key>ASUS</key>
+				<dict>
+					<key>1201N</key>
+					<dict>
+						<key>DragExitDelayTime</key>
+						<integer>0</integer>
+						<key>SwapDoubleTriple</key>
+						<true/>
+					</dict>
+				</dict>
 				<key>DELL</key>
 				<dict>
 					<key>SNB-CPT</key>
@@ -405,6 +447,12 @@
 					<string>ProBook</string>
 					<key>17F6</key>
 					<string>ProBook</string>
+					<key>1942</key>
+					<string>ProBook</string>
+					<key>1949</key>
+					<string>ProBook</string>
+					<key>198F</key>
+					<string>ProBook</string>
 					<key>ProBook</key>
 					<dict>
 						<key>FingerZ</key>
@@ -429,7 +477,7 @@
 		<key>com.apple.kpi.mach</key>
 		<string>9.0.0</string>
 		<key>org.rehabman.voodoo.driver.PS2Controller</key>
-		<string>1.8.11</string>
+		<string>1.8.13</string>
 	</dict>
 	<key>OSBundleRequired</key>
 	<string>Console</string>

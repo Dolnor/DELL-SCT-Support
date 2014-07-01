@@ -209,6 +209,8 @@
 	</dict>
 	<key>Devices</key>
 	<dict>
+		<key>UseIntelHDMI</key>
+		<true/>
 		<key>Inject</key>
 		<false/>
 		<key>Audio</key>
