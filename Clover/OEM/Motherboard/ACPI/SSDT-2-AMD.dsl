@@ -644,10 +644,12 @@ DefinitionBlock ("SSDT-2.aml", "SSDT", 2, "DELL ", "SsdtIGPU", 0x00001000)
                     })
                 }
 
-                Return (Package (0x02)
+                Return (Package (0x04)
                 {
                     "RM,oem-id", 
-                    "DELL"
+                    "DELL",
+                    "RM,oem-table-id",
+                    "SNB-CPT"
                 })
             }
             

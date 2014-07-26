@@ -4,6 +4,8 @@
 <dict>
 	<key>Boot</key>
 	<dict>
+		<key>CustomLogo</key>
+		<false/>
 		<key>NeverHibernate</key>
 		<true/>
 		<key>Fast</key>
@@ -11,7 +13,7 @@
 		<key>Log</key>
 		<false/>
 		<key>Arguments</key>
-		<string>slide=0</string>
+		<string>slide=0 kext-dev-mode=1</string>
 		<key>Timeout</key>
 		<integer>2</integer>
 		<key>DefaultVolume</key>

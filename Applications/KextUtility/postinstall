@@ -1,9 +1,11 @@
 #!/bin/bash
 if [ ! -r "$HOME/Desktop/Tools" ];
 then
-	mkdir "$HOME/Desktop/Tools"
-	chown "$USER" "$HOME/Desktop/Tools"
+    mkdir "$HOME/Desktop/Tools"
+    chown "$USER" "$HOME/Desktop/Tools"
 fi
 unzip "${3}/tmp/App/KextUtility.zip" -d "${3}/tmp/App/"
-cp -Rf "${3}/tmp/App/KextUtility.app" "$HOME/Desktop/Tools/"
-chown -R "$USER" "$HOME/Desktop/Tools/KextUtility.app"
+cp -Rf "${3}/tmp/App/KextUtility-7-8-10.app" "$HOME/Desktop/Tools/"
+cp -Rf "${3}/tmp/App/KextUtility-9.app" "$HOME/Desktop/Tools/"
+chown -R "$USER" "$HOME/Desktop/Tools/KextUtility-7-8-10.app"
+chown -R "$USER" "$HOME/Desktop/Tools/KextUtility-9.app"

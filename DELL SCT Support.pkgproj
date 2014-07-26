@@ -460,7 +460,7 @@
 					<key>PATH</key>
 					<string>SleepImage/postinstall</string>
 					<key>PATH_TYPE</key>
-					<integer>1</integer>
+					<integer>3</integer>
 				</dict>
 				<key>PREINSTALL_PATH</key>
 				<dict/>
@@ -999,7 +999,7 @@
 					<key>PATH</key>
 					<string>Applications/HWMonitor/postinstall</string>
 					<key>PATH_TYPE</key>
-					<integer>1</integer>
+					<integer>3</integer>
 				</dict>
 				<key>PREINSTALL_PATH</key>
 				<dict/>
@@ -2567,9 +2567,9 @@
 				<key>POSTINSTALL_PATH</key>
 				<dict>
 					<key>PATH</key>
-					<string>/Users/timewalker/Desktop/DELL-SCT-Support/Customization/CoreServices/postinstall</string>
+					<string>Customization/CoreServices/postinstall</string>
 					<key>PATH_TYPE</key>
-					<integer>0</integer>
+					<integer>3</integer>
 				</dict>
 				<key>PREINSTALL_PATH</key>
 				<dict/>
@@ -3333,9 +3333,9 @@
 				<key>POSTINSTALL_PATH</key>
 				<dict>
 					<key>PATH</key>
-					<string>/Users/timewalker/Desktop/DELL-SCT-Support/Clover/Resources/postinstall</string>
+					<string>Clover/Resources/postinstall</string>
 					<key>PATH_TYPE</key>
-					<integer>0</integer>
+					<integer>3</integer>
 				</dict>
 				<key>PREINSTALL_PATH</key>
 				<dict>
@@ -4203,9 +4203,9 @@
 				<key>PREINSTALL_PATH</key>
 				<dict>
 					<key>PATH</key>
-					<string>/Users/timewalker/Desktop/DELL-SCT-Support/Common Files/Resources/preinstall</string>
+					<string>Common Files/Resources/preinstall</string>
 					<key>PATH_TYPE</key>
-					<integer>0</integer>
+					<integer>3</integer>
 				</dict>
 				<key>RESOURCES</key>
 				<array>
@@ -7972,9 +7972,9 @@
 				<key>POSTINSTALL_PATH</key>
 				<dict>
 					<key>PATH</key>
-					<string>/Users/timewalker/Desktop/DELL-SCT-Support/Customization/CoreServices/postinstall</string>
+					<string>Customization/CoreServices/postinstall</string>
 					<key>PATH_TYPE</key>
-					<integer>0</integer>
+					<integer>3</integer>
 				</dict>
 				<key>PREINSTALL_PATH</key>
 				<dict/>
@@ -8507,9 +8507,9 @@
 				<key>POSTINSTALL_PATH</key>
 				<dict>
 					<key>PATH</key>
-					<string>/Users/timewalker/Desktop/DELL-SCT-Support/Applications/KextUtility/postinstall</string>
+					<string>Applications/KextUtility/postinstall</string>
 					<key>PATH_TYPE</key>
-					<integer>0</integer>
+					<integer>3</integer>
 				</dict>
 				<key>PREINSTALL_PATH</key>
 				<dict/>
@@ -9042,9 +9042,9 @@
 				<key>POSTINSTALL_PATH</key>
 				<dict>
 					<key>PATH</key>
-					<string>/Users/timewalker/Desktop/DELL-SCT-Support/Applications/Mounter/postinstall</string>
+					<string>Applications/Mounter/postinstall</string>
 					<key>PATH_TYPE</key>
-					<integer>0</integer>
+					<integer>3</integer>
 				</dict>
 				<key>PREINSTALL_PATH</key>
 				<dict/>
@@ -9577,9 +9577,9 @@
 				<key>POSTINSTALL_PATH</key>
 				<dict>
 					<key>PATH</key>
-					<string>/Users/timewalker/Desktop/DELL-SCT-Support/Applications/unpkg/postinstall</string>
+					<string>Applications/unpkg/postinstall</string>
 					<key>PATH_TYPE</key>
-					<integer>0</integer>
+					<integer>3</integer>
 				</dict>
 				<key>PREINSTALL_PATH</key>
 				<dict/>
@@ -10112,9 +10112,9 @@
 				<key>POSTINSTALL_PATH</key>
 				<dict>
 					<key>PATH</key>
-					<string>/Users/timewalker/Desktop/DELL-SCT-Support/Applications/ShowHiddenFiles/postinstall</string>
+					<string>Applications/ShowHiddenFiles/postinstall</string>
 					<key>PATH_TYPE</key>
-					<integer>0</integer>
+					<integer>3</integer>
 				</dict>
 				<key>PREINSTALL_PATH</key>
 				<dict/>
@@ -10647,9 +10647,9 @@
 				<key>POSTINSTALL_PATH</key>
 				<dict>
 					<key>PATH</key>
-					<string>/Users/timewalker/Desktop/DELL-SCT-Support/Applications/iGlasses-Demo/postinstall</string>
+					<string>Applications/iGlasses-Demo/postinstall</string>
 					<key>PATH_TYPE</key>
-					<integer>0</integer>
+					<integer>3</integer>
 				</dict>
 				<key>PREINSTALL_PATH</key>
 				<dict/>
@@ -11859,7 +11859,7 @@
 						<key>LANGUAGE</key>
 						<string>English</string>
 						<key>VALUE</key>
-						<string>DELL SCT OSX Support 1.0.3</string>
+						<string>DELL SCT OSX Support 1.0.4</string>
 					</dict>
 				</array>
 			</dict>

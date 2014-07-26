@@ -1,6 +1,7 @@
 #!/bin/bash
 
 sle="${3}/System/Library/Extensions"
+osver=`sw_vers -productVersion`
 
 # rebilding kernelcache
 touch "${sle}"
@@ -30,12 +31,12 @@ backup="${3}/tmp/temp.plist"
 ## copy network kexts to ESP
 if [ -r "${sle}/RealtekRTL8111.kext" ];
 then
-    cp -Rf "${sle}/RealtekRTL8111.kext" "${efi}/EFI/CLOVER/kexts/10.9/RealtekRTL8111.kext"
+    cp -Rf "${sle}/RealtekRTL8111.kext" "${efi}/EFI/CLOVER/kexts/Other/RealtekRTL8111.kext"
 fi
 
 if [ -r "${sle}/RealtekRTL8100.kext" ];
 then
-    cp -Rf "${sle}/RealtekRTL8100.kext" "${efi}/EFI/CLOVER/kexts/10.9/RealtekRTL8100.kext"
+    cp -Rf "${sle}/RealtekRTL8100.kext" "${efi}/EFI/CLOVER/kexts/Other/RealtekRTL8100.kext"
 fi
 
 ## compile and copy ACPI tables to ESP
@@ -48,6 +49,16 @@ then
     cp "${3}/tmp/ACPI/SSDT-1.aml" "${acpi}"
     cp "${3}/tmp/ACPI/SSDT-2.aml" "${acpi}"
     cp "${3}/tmp/ACPI/SSDT-3.aml" "${acpi}"
+fi
+
+# in 10.10 use loginwindow hooks which execute RC scripts
+# though hooks have been officially deprecated since 10.4 ...
+if [ ${osver} == '10.10' -o ${osver%??} == '10.10' ]
+then
+    chmod +x /private/etc/rc.local
+    chmod +x /private/etc/rc.shutdown.local
+    defaults write com.apple.loginwindow LoginHook /private/etc/rc.local
+    defaults write com.apple.loginwindow LogoutHook /private/etc/rc.shutdown.local
 fi
 
 ## unmount EFI System partition
