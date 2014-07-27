@@ -31,13 +31,13 @@
 				<key>Name</key>
 				<string>AppleUSBXHCI</string>
 				<key>Find</key>
-				<data>dTpIiwU=</data>
+				<data>1AAAAIB1</data>
 				<key>Replace</key>
-				<data>6zpIiwU=</data>
+				<data>1AAAAIDr</data>
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>XHCI - eliminate chip version check</string>
+				<string>XHCI - eliminate chip version check 10.9</string>
 				<key>Name</key>
 				<string>AppleUSBXHCI</string>
 				<key>Find</key>
@@ -47,23 +47,23 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>XHCI - use single interrupter 1</string>
+				<string>XHCI - eliminate chip version check 10.10</string>
 				<key>Name</key>
 				<string>AppleUSBXHCI</string>
 				<key>Find</key>
-				<data>RwgAAEA=</data>
+				<data>PQABAAAP</data>
 				<key>Replace</key>
-				<data>RwgAAAA=</data>
+				<data>PQAAAAAP</data>
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>XHCI - use single interrupter 2</string>
+				<string>XHCI - use single interrupter</string>
 				<key>Name</key>
 				<string>AppleUSBXHCI</string>
 				<key>Find</key>
-				<data>SQgAAEA=</data>
+				<data>CAAAQA==</data>
 				<key>Replace</key>
-				<data>SQgAAAA=</data>
+				<data>CAAAAA==</data>
 			</dict>
 			<dict>
 				<key>Comment</key>
@@ -77,13 +77,13 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>XHCI - not present in ACPI</string>
+				<string>XHCI - pm not present in ACPI</string>
 				<key>Name</key>
 				<string>AppleUSBXHCI</string>
 				<key>Find</key>
-				<data>dU1Iiw==</data>
+				<data>SIXAdU0=</data>
 				<key>Replace</key>
-				<data>601Iiw==</data>
+				<data>SIXA600=</data>
 			</dict>
 			<dict>
 				<key>Comment</key>
@@ -91,19 +91,9 @@
 				<key>Name</key>
 				<string>AirPortBrcm4360</string>
 				<key>Find</key>
-				<data>MGsQAAB1DQ==</data>
+				<data>axAAAHUN</data>
 				<key>Replace</key>
-				<data>MGsQAACQkA==</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Remove configurePM 30sec Delay</string>
-				<key>Name</key>
-				<string>IOBluetoothHostControllerUSBTransport</string>
-				<key>Find</key>
-				<data>AAAAD4UHAQAA</data>
-				<key>Replace</key>
-				<data>AAAAD4QHAQAA</data>
+				<data>axAAAJCQ</data>
 			</dict>
 			<dict>
 				<key>Comment</key>
@@ -164,6 +154,16 @@
 				<data>hAjsEA==</data>
 				<key>Replace</key>
 				<data>AAAAAA==</data>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>SSD TRIM</string>
+				<key>Name</key>
+				<string>IOAHCIBlockStorage</string>
+				<key>Find</key>
+				<data>QVBQTEUgU1NE</data>
+				<key>Replace</key>
+				<data>AAAAAAAAAAAA</data>
 			</dict>
 		</array>
 	</dict>
