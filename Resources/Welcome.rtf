@@ -1,26 +1,40 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1326\cocoasubrtf110
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
 {\fonttbl\f0\fswiss\fcharset0 Helvetica;}
 {\colortbl;\red255\green255\blue255;\red217\green11\blue0;}
 \paperw11900\paperh16840\margl1440\margr1440\vieww21000\viewh10260\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
-\f0\fs24 \cf0 DELL OSX Support Package is an all-in-one post installation tool for SecrueCore Tiano based 14\'94 DELL laptops of Intel Sandy Bridge era running in UEFI mode.\
+\f0\fs24 \cf0 DELL OSX Support Package is an all-in-one post installation tool for SecrueCore Tiano based DELL laptops of Intel Sandy Bridge era running in UEFI mode.\
 \
 Supported models are:\
 \
 - Vostro 3450 \
 - Inspiron N4110\
+- XPS L702x Optimus\
 \
 
 \b NB:
 \b0 \
-Make sure to update your BIOS to {\field{\*\fldinst{HYPERLINK "https://dl.dropboxusercontent.com/u/2573233/mac0s_10.9/Dell/bios_mods/Inspiron_I14R_BIOS_A12C4.rar"}}{\fldrslt Inspiron A12C4}} and {\field{\*\fldinst{HYPERLINK "https://dl.dropboxusercontent.com/u/2573233/mac0s_10.9/Dell/bios_mods/Vostro_3450_BIOS_A13C4.rar"}}{\fldrslt Vostro A13C4}} before you install, crucial changes to ACPI have been made! See included Readme for details.\
+Make sure to update your BIOS to \
+{\field{\*\fldinst{HYPERLINK "https://dl.dropboxusercontent.com/u/2573233/mac0s_10.9/Dell/bios_mods/Inspiron_I14R_BIOS_A12C4.rar"}}{\fldrslt Inspiron A12C4}}  | {\field{\*\fldinst{HYPERLINK "https://dl.dropboxusercontent.com/u/2573233/mac0s_10.9/Dell/bios_mods/Vostro_3450_BIOS_A13C4.rar"}}{\fldrslt Vostro A13C4}} | {\field{\*\fldinst{HYPERLINK "https://www.dropbox.com/s/u2cf33g4z2jo9k0/XPS_L702X_BIOS_A19C4.rar"}}{\fldrslt XPS 17 A19C4}}\
+before you install, crucial changes to ACPI have been made! See included Readme for details.\
 \
 The original discussion and support thread:\
-{\field{\*\fldinst{HYPERLINK "http://www.insanelymac.com/forum/topic/293246-mavericks-on-dell-vostro-3450-inspiron-14r-uefi-clover/"}}{\fldrslt Mavericks on DELL Vostro 3450 & Inspiron 14R UEFI Clover}}\
+{\field{\*\fldinst{HYPERLINK "http://www.insanelymac.com/forum/topic/293246-mavericks-on-dell-vostro-3450-inspiron-14r-uefi-clover/"}}{\fldrslt OSX on DELL Vostro 3450 / Inspiron N4110 / XPS L702x UEFI Clover}}\
 \
 
 \b Change Log:\
+\
+Version 1.1.0 (September 5th, 2014):\
+\
+
+\b0 - Internal reorganization of catalogs and packages\
+- Added support for XPS 17 model L702x\
+- CodecCommander updated to 2.2.0, solves all the EAPD woes we had before\
+- Clover UEFI updated to rev.2873\
+- EmuVariable driver removed, native NVRAM support was added with new AptioFix driver\
+- Standalone rc scripts removed, using Clover\'92s launchd daemon now for log preserving and rotation
+\b \
 \
 Version 1.0.4 (July 26th, 2014):\
 \
@@ -34,10 +48,6 @@ Version 1.0.4 (July 26th, 2014):\
 - On ESP all kernel extensions moved to Other folder to support  both 10.9 and 10.10 installation\
 - Temperoray using loginwindow hooks in order to call rc script as they are deprecated in Yosemite\
 - Added KextUtility v2.5.1 for use in Yosemite, using v2.5.6 \cf2 will break signature on KextExcludeList causing boot failure\cf0 \
-
-\b \
-NB:
-\b0  Customization images won\'92t be shown in Yosemite, have to address this in a future update if I find where they go\'85\
 
 \b \
 Version 1.0.3 (July 1st, 2014):\

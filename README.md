@@ -49,6 +49,9 @@
 
 **Applications:**
 
+**- patchmatic** is courtesy of **RehabMan**
+[MacIASL command line patcher](https://github.com/RehabMan/OS-X-MaciASL-patchmatic)
+
 **- Kext Utility** is courtesy of **cVaD**
 
 [The original support thread](http://www.insanelymac.com/forum/topic/140647-latest-kext-utility-mavericks-super-speed-edition/)

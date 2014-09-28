@@ -10,6 +10,26 @@ touch "${sle}"
 efi=$( df | grep EFI | sed -nE 's/.*% +([-A-F0-9]+)*/\1/p' )
 config="${efi}/EFI/CLOVER/config.plist"
 backup="${3}/tmp/temp.plist"
+c14="${3}/tmp/config-14.plist"
+c17="${3}/tmp/config-17.plist"
+
+## check dell system type and select serial number identifier according to screen size
+dell_system=$( /usr/libexec/PlistBuddy -c "Print DellSystem" ${backup} )
+
+    if [ ${dell_system} -eq 14 ]
+    then
+        suid="DH2L"
+    fi
+
+    if [ ${dell_system} -eq 15 ]
+    then
+        suid="DRJC"
+    fi
+
+    if [ ${dell_system} -eq 17 ]
+    then
+        suid="DF92"
+    fi
 
     if [ -e $backup ]
     then
@@ -20,8 +40,8 @@ backup="${3}/tmp/temp.plist"
         chars=ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890
         week_letter=`echo ${week:$(($RANDOM%${#week})):1}`
         function random_char { echo ${chars:$(($RANDOM%${#chars})):1}; }
-        serial="SG2F"$week_letter$(random_char)$(random_char)$(random_char)"DH2L"
-        boardserial="SG2F"$week_letter$(random_char)$(random_char)$(random_char)$(random_char)$(random_char)$(random_char)$(random_char)$(random_char)"DH2L"
+        serial="SG2F"$week_letter$(random_char)$(random_char)$(random_char)$suid
+        boardserial="SG2F"$week_letter$(random_char)$(random_char)$(random_char)$(random_char)$(random_char)$(random_char)$(random_char)$(random_char)$suid
     fi
 
 /usr/libexec/PlistBuddy -c "Set SMBIOS:SerialNumber $serial" ${config}
@@ -42,6 +62,27 @@ fi
 ## compile and copy ACPI tables to ESP
 if [ -r "${3}/tmp/ACPI" ];
 then
+    ## patch rootport number for XPS17
+    if [ ${dell_system} -eq 17 ]
+    then
+        if [ -e /tmp/ACPI//SSDT-3-BCM.dsl ]
+        then
+            ssdt_arpt="${3}/tmp/ACPI/SSDT-3-BCM1.dsl"
+        fi
+
+        if [ -e /tmp/ACPI//SSDT-3-BCM2.dsl ]
+        then
+            ssdt_arpt="${3}/tmp/ACPI/SSDT-3-BCM2.dsl"
+        fi
+
+        if [ -e /tmp/ACPI//SSDT-3-ATH.dsl ]
+        then
+            ssdt_arpt="${3}/tmp/ACPI/SSDT-3-ATH.dsl"
+        fi
+
+        ${3}/tmp/ACPI/patchmatic ${ssdt_arpt} ${3}/tmp/ACPI/arpt_17.txt ${ssdt_arpt}
+    fi
+
     ${3}/tmp/ACPI/iasl ${3}/tmp/ACPI/*.dsl
 
     acpi="${efi}/EFI/CLOVER/ACPI/patched/"
@@ -49,16 +90,26 @@ then
     cp "${3}/tmp/ACPI/SSDT-1.aml" "${acpi}"
     cp "${3}/tmp/ACPI/SSDT-2.aml" "${acpi}"
     cp "${3}/tmp/ACPI/SSDT-3.aml" "${acpi}"
+
+    # need to disable optimus
+    if [ -e "${3}/tmp/ACPI/SSDT-4.aml" ]
+    then
+        cp "${3}/tmp/ACPI/SSDT-4.aml" "${acpi}"
+    fi
 fi
 
-# in 10.10 use loginwindow hooks which execute RC scripts
+## remove old rc scripts, clover uses launchd now
+if [ -e /private/etc/rc.shutdown.local ]
+then
+    rm /private/etc/rc.shutdown.local
+    rm /private/etc/rc.local
+fi
+
+# in 10.10 Beta 1 use loginwindow hooks which execute RC scripts
 # though hooks have been officially deprecated since 10.4 ...
 if [ ${osver} == '10.10' -o ${osver%??} == '10.10' ]
 then
-    chmod +x /private/etc/rc.local
-    chmod +x /private/etc/rc.shutdown.local
-    defaults write com.apple.loginwindow LoginHook /private/etc/rc.local
-    defaults write com.apple.loginwindow LogoutHook /private/etc/rc.shutdown.local
+    defaults write com.apple.loginwindow LogoutHook /private/etc/rc.shutdown.d/80.save_nvram_plist.local
 fi
 
 ## unmount EFI System partition
@@ -75,10 +126,20 @@ rm -R "${3}/tmp/EFI"
 rm -R "${3}/tmp/ACPI"
 rm -R "${3}/tmp/App"
 
-## delete temp plist
+## delete temp plist and placeholder config plists
 if [ -e $backup ]
 then
     rm ${backup}
+fi
+
+if [ -e $c14 ]
+then
+    rm ${c14}
+fi
+
+if [ -e $c17 ]
+then
+    rm ${c17}
 fi
 
 exit 0

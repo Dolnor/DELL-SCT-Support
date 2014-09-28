@@ -1,0 +1,14 @@
+#!/bin/bash
+
+## copy clover main portion to ESP
+efi=$( df | grep EFI | sed -nE 's/.*% +([-A-F0-9]+)*/\1/p' )
+cp "${3}/tmp/config-14.plist" "${efi}/EFI/CLOVER/config.plist"
+
+## let installer know we are installing on 14" model
+sbackup="${3}/tmp/temp.plist"
+if [ -e $sbackup ];
+then
+    /usr/libexec/PlistBuddy -c "Add DellSystem integer 14" ${sbackup}
+fi
+
+exit 0

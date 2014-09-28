@@ -25,7 +25,7 @@ DefinitionBlock ("SSDT-3.aml", "SSDT", 2, "DELL ", "SsdtArpt", 0x00001000)
 
     Scope (\_SB.PCI0)
     {
-        // Custom property injection for DW1702 card
+        // Custom property injection for Dell DW1702 card
         Scope (\_SB.PCI0.RP01.PXSX)
         {
             Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method

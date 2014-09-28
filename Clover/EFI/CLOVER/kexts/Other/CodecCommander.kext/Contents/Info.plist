@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>CodecCommander</string>
 	<key>CFBundleGetInfoString</key>
-	<string>2.1.2, Copyright © 2013-2014 TimeWalker. All rights reserved.</string>
+	<string>2.2.0, Copyright © 2013-2014 TimeWalker. All rights reserved.</string>
 	<key>CFBundleIdentifier</key>
 	<string>org.tw.CodecCommander</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -19,11 +19,11 @@
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.1.2</string>
+	<string>2.2.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>2.1.2</string>
+	<string>2.2.0</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
@@ -40,17 +40,6 @@
 	<string>5A2034a</string>
 	<key>IOKitPersonalities</key>
 	<dict>
-		<key>CCHIDKeyboard</key>
-		<dict>
-			<key>CFBundleIdentifier</key>
-			<string>org.tw.CodecCommander</string>
-			<key>IOClass</key>
-			<string>CCHIDKeyboard</string>
-			<key>IONameMatch</key>
-			<string>CCHIDKeyboardDevice</string>
-			<key>IOProviderClass</key>
-			<string>CCHIDKeyboardDevice</string>
-		</dict>
 		<key>CodecCommander</key>
 		<dict>
 			<key>CFBundleIdentifier</key>
@@ -69,12 +58,8 @@
 				<dict>
 					<key>1201N</key>
 					<dict>
-						<key>Generate Stream</key>
-						<false/>
 						<key>HDEF Device Location</key>
 						<string>8</string>
-						<key>Update Headphone Node</key>
-						<integer>21</integer>
 					</dict>
 				</dict>
 				<key>Default</key>
@@ -82,25 +67,23 @@
 					<key>Check Infinitely</key>
 					<true/>
 					<key>Check Interval</key>
-					<integer>3000</integer>
+					<integer>5000</integer>
 					<key>Codec Address Number</key>
 					<integer>0</integer>
-					<key>Engine Output Number</key>
-					<integer>1</integer>
-					<key>Generate Stream</key>
-					<true/>
 					<key>HDEF Device Location</key>
 					<string>1B</string>
-					<key>Simulate Headphones</key>
-					<integer>33</integer>
-					<key>Stream Delay</key>
+					<key>Send Delay</key>
 					<integer>500</integer>
-					<key>Update Extra Node</key>
-					<string>0</string>
-					<key>Update Headphone Node</key>
-					<integer>0</integer>
-					<key>Update Speaker Node</key>
-					<integer>20</integer>
+				</dict>
+				<key>Gigabyte</key>
+				<dict>
+					<key>H87-HD3</key>
+					<dict>
+						<key>Check Infinitely</key>
+						<false/>
+						<key>Codec Address Number</key>
+						<integer>2</integer>
+					</dict>
 				</dict>
 			</dict>
 		</dict>

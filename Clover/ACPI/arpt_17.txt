@@ -1,0 +1,2 @@
+into_all all code_regex RP01 replaceall_matched begin RP02 end;
+into scope label \_SB.PCI0.RP01.PXSX set_label begin \_SB.PCI0.RP02.PXSX end;
