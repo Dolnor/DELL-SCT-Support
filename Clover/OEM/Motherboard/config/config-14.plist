@@ -4,8 +4,6 @@
 <dict>
 	<key>Boot</key>
 	<dict>
-		<key>NeverHibernate</key>
-		<true/>
 		<key>Fast</key>
 		<false/>
 		<key>Log</key>

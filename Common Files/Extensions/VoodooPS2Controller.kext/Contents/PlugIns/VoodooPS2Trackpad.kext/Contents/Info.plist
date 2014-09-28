@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>13E28</string>
+	<string>14A361c</string>
 	<key>CFBundleExecutable</key>
 	<string>VoodooPS2Trackpad</string>
 	<key>CFBundleGetInfoString</key>
@@ -75,6 +75,8 @@
 					<string>ProBook</string>
 					<key>179C</key>
 					<string>ProBook</string>
+					<key>17A9</key>
+					<string>ProBook</string>
 					<key>17F0</key>
 					<string>ProBook</string>
 					<key>17F3</key>
@@ -141,6 +143,8 @@
 					<key>179B</key>
 					<string>ProBook</string>
 					<key>179C</key>
+					<string>ProBook</string>
+					<key>17A9</key>
 					<string>ProBook</string>
 					<key>17F0</key>
 					<string>ProBook</string>
@@ -240,16 +244,6 @@
 			<string>ApplePS2MouseDevice</string>
 			<key>Platform Profile</key>
 			<dict>
-				<key>ASUS</key>
-				<dict>
-					<key>1201N</key>
-					<dict>
-						<key>DragExitDelayTime</key>
-						<integer>0</integer>
-						<key>SwapDoubleTriple</key>
-						<true/>
-					</dict>
-				</dict>
 				<key>DELL</key>
 				<dict>
 					<key>SNB-CPT</key>
@@ -397,7 +391,7 @@
 					<key>TapThresholdY</key>
 					<integer>50</integer>
 					<key>USBMouseStopsTrackpad</key>
-					<integer>1</integer>
+					<integer>0</integer>
 					<key>UnitsPerMMX</key>
 					<integer>50</integer>
 					<key>UnitsPerMMY</key>
@@ -440,6 +434,8 @@
 					<key>179B</key>
 					<string>ProBook</string>
 					<key>179C</key>
+					<string>ProBook</string>
+					<key>17A9</key>
 					<string>ProBook</string>
 					<key>17F0</key>
 					<string>ProBook</string>

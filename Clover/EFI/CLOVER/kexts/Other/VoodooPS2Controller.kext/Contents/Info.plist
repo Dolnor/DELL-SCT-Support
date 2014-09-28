@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>13E28</string>
+	<string>14A361c</string>
 	<key>CFBundleExecutable</key>
 	<string>VoodooPS2Controller</string>
 	<key>CFBundleGetInfoString</key>
@@ -95,6 +95,8 @@
 					<key>179B</key>
 					<string>ProBook</string>
 					<key>179C</key>
+					<string>ProBook</string>
+					<key>17A9</key>
 					<string>ProBook</string>
 					<key>17F0</key>
 					<string>ProBook</string>

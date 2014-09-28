@@ -25,6 +25,27 @@ The original discussion and support thread:\
 
 \b Change Log:\
 \
+Version 1.1.1 (September 28th, 2014):\
+\
+
+\b0 - Clover updated to rev.2922\
+- HWSensors and HWMonitor updated to 6.11.1328\
+- ACPIBacklight updated to 2.0.3 to address backlight issues after sleep in Yosemite\
+- ACPIBatteryManager updated to 1.53 \
+- RealtekRTL8111 updated to 1.2.3-dev2 to address Ethernet loss after sleep in Yosemite\
+- CodecCommander updated to 2.2.1, implementing further tweaks for automatic node detection
+\b \
+
+\b0 - Standard AptioFix driver replaced with experimental AptioFix2, native NVRAM is still functional without EmuVariable\
+- NeverHibernate flag removed from config because 
+\i \cf2 hibernation is now possible on Tiano firmware
+\i0 \cf0 , by default SCT Package will set the mode to 7 (same as default mode 3, but with encryption disabled, because it\'92s not working on hackintoshes). You can still disable hibernation by choosing respective entry in Installation Customization if you really need those 4 Gb of space and care for SSD life that will outlive your laptop.\
+\
+
+\b N.B. 
+\b0 If your laptop behaves really slow (kernel_task takes all the CPU load) and temperatures are sky rocketing over 80C - reflash your BIOS using Pflash.efi method, but specify /cvar flag in startup.nsh to clear NVRAM store! This may happen after getting rid of EmuVariable driver with previous release of the package.
+\b \
+\
 Version 1.1.0 (September 5th, 2014):\
 \
 

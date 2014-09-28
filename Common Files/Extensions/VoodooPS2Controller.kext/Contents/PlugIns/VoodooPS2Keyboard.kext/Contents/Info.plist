@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>13E28</string>
+	<string>14A361c</string>
 	<key>CFBundleExecutable</key>
 	<string>VoodooPS2Keyboard</string>
 	<key>CFBundleGetInfoString</key>
@@ -48,76 +48,6 @@
 			<string>ApplePS2KeyboardDevice</string>
 			<key>Platform Profile</key>
 			<dict>
-				<key>ASUS</key>
-				<dict>
-					<key>1201N</key>
-					<dict>
-						<key>ActionSwipeDown</key>
-						<string>63 d, 63 u</string>
-						<key>ActionSwipeUp</key>
-						<string>61 d, 61 u</string>
-						<key>Function Keys Special</key>
-						<array>
-							<string>;The following 12 items map Fn+fkeys to fkeys</string>
-							<string>e05f=3b</string>
-							<string>e007=3c</string>
-							<string>;no fn combo</string>
-							<string>;no fn combo</string>
-							<string>e005=3f</string>
-							<string>e006=40</string>
-							<string>e008=41</string>
-							<string>e06e=42</string>
-							<string>e009=43</string>
-							<string>e020=44</string>
-							<string>e02e=57</string>
-							<string>e030=58</string>
-							<string>;The following 12 items map fkeys to Fn+fkeys</string>
-							<string>3b=e05f;Map sleep key to f1</string>
-							<string>3c=e0f0;Map radio toggle action from EC query to f2</string>
-							<string>;no fn combo</string>
-							<string>;no fn combo</string>
-							<string>3f=e005;Map brightness down to f5</string>
-							<string>40=e006;Map brightness up to f6</string>
-							<string>41=e0f1;Map display toggle action from EC query to f7</string>
-							<string>42=e06e; Map vidmirror to f8</string>
-							<string>43=e0f2; Map touchpad toggle action from EC query to f9</string>
-							<string>44=e020</string>
-							<string>57=e02e</string>
-							<string>58=e030</string>
-						</array>
-						<key>Function Keys Standard</key>
-						<array>
-							<string>;The following 12 items map Fn+fkeys to Fn+fkeys</string>
-							<string>e05f=e05f;Fn+f1 - sleep</string>
-							<string>e007=e007;Fn+f2 - rftoggle - EC query call Q06</string>
-							<string>;Fn+f3 blank</string>
-							<string>;Fn+f4 blank</string>
-							<string>e005=e005;Fn+f5 - brdown - EC query call Q0B</string>
-							<string>e006=e006;Fn+f6 -brup - EC query call Q0D</string>
-							<string>e008=e008;Fn+f7 - backlight toggle - EC query call Q10</string>
-							<string>e06e=e06e; Fn+f8 - vidmirror - EC query call Q12</string>
-							<string>e009=e009;Fn+f9 - touchpad toggle - EC query call Q14</string>
-							<string>e020=e020;Fn+f10 - mute</string>
-							<string>e02e=e02e;Fn+f11 - voldown</string>
-							<string>e030=e030;Fn+f12 - volup</string>
-							<string>;The following 12 items map fkeys to fkeys</string>
-							<string>3b=3b</string>
-							<string>3c=3c</string>
-							<string>3d=3d</string>
-							<string>3e=3e</string>
-							<string>3f=3f</string>
-							<string>40=40</string>
-							<string>41=41</string>
-							<string>42=42</string>
-							<string>43=43</string>
-							<string>44=44</string>
-							<string>57=57</string>
-							<string>58=58</string>
-						</array>
-						<key>Note-Author</key>
-						<string>TimeWalker aka TimeWalker75a</string>
-					</dict>
-				</dict>
 				<key>DELL</key>
 				<dict>
 					<key>Dell-Keys</key>
@@ -380,6 +310,8 @@
 					<string>ProBook-87;ProBook 6470b</string>
 					<key>179C</key>
 					<string>ProBook-87;ProBook 6470b</string>
+					<key>17A9</key>
+					<string>ProBook-87;ProBook 8570b</string>
 					<key>17F0</key>
 					<string>ProBook-102;ProBook 4340s</string>
 					<key>17F3</key>

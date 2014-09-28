@@ -5,5 +5,17 @@ efi=$( df | grep EFI | sed -nE 's/.*% +([-A-F0-9]+)*/\1/p' )
 
 cp -R "${3}/tmp/EFI" "${efi}"
 
+## set up hibernation
+pmset -a hibernatemode 7
+
+if [ -f /private/var/vm/sleepimage ];
+then
+    rm /private/var/vm/sleepimage
+fi
+
+if [ -d /private/var/vm/sleepimage ];
+then
+    rm /private/var/vm/sleepimage
+fi
 
 exit 0
