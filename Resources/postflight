@@ -65,7 +65,7 @@ then
     ## patch rootport number for XPS17
     if [ ${dell_system} -eq 17 ]
     then
-        if [ -e /tmp/ACPI//SSDT-3-BCM.dsl ]
+        if [ -e /tmp/ACPI//SSDT-3-BCM1.dsl ]
         then
             ssdt_arpt="${3}/tmp/ACPI/SSDT-3-BCM1.dsl"
         fi
