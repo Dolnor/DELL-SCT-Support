@@ -534,6 +534,36 @@ DefinitionBlock ("SSDT-2.aml", "SSDT", 2, "DELL ", "SsdtIGPU", 0x00001000)
                     \_SB.PCI0.LPCB.EC0._O8C ()
                 }
             }
+            
+            // revert what EC is doing for touchpad LED 
+            Method (RKA1, 1, NotSerialized)
+            {
+                If (Arg0)
+                {
+                     Store(LNot(^^EC0.TLED), ^^EC0.TLED)
+                }
+            }
+            
+            // revert what EC is doing for keyboard backlight 
+            Method (RKA2, 1, NotSerialized)
+            {
+                If (Arg0)
+                {
+                    Store (^^EC0.KBBL, Local0)
+                    If (LEqual(Local0,Zero))
+                    {
+                        Store (0x01, ^^EC0.KBBL)
+                    }
+                    If (LEqual(Local0,0x02))
+                    {
+                        Store (0x00, ^^EC0.KBBL)
+                    }
+                    If (LEqual(Local0,One))
+                    {
+                        Store (0x02, ^^EC0.KBBL)
+                    }
+                }
+            }
 
             // control keyboard backlight in special f-key mode
             Method (RKA3, 1, NotSerialized)

@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>14A388a</string>
+	<string>14D72i</string>
 	<key>CFBundleExecutable</key>
 	<string>VoodooPS2Keyboard</string>
 	<key>CFBundleGetInfoString</key>
@@ -25,17 +25,17 @@
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
-	<string>5A2034a</string>
+	<string>6A2008a</string>
 	<key>DTPlatformVersion</key>
 	<string>GM</string>
 	<key>DTSDKBuild</key>
-	<string>12D75</string>
+	<string>13F26</string>
 	<key>DTSDKName</key>
-	<string>macosx10.8</string>
+	<string>macosx10.9</string>
 	<key>DTXcode</key>
-	<string>0501</string>
+	<string>0611</string>
 	<key>DTXcodeBuild</key>
-	<string>5A2034a</string>
+	<string>6A2008a</string>
 	<key>IOKitPersonalities</key>
 	<dict>
 		<key>ApplePS2Keyboard</key>
@@ -127,27 +127,30 @@
 						<key>Breakless PS2</key>
 						<array>
 							<string>e01e;Touchpad Fn+f3 is breakless</string>
+							<string>e00c;Keyboard Fn+f6 is breakless</string>
 							<string>e06e;REVIEW: temporary for case that macro inversion does not work...</string>
 						</array>
 						<key>Custom ADB Map</key>
 						<array>
+							<string>e0f1=63;Special F3</string>
+							<string>e0f2=61;Special F6</string>
+							<string>e052=72;Insert to Help</string>
+							<string>e037=69;PrintScreen to F13</string>
 							<string>e009=83;Dell Support to Launchpad</string>
 							<string>e06e=70;Map vidmirror key for special mode default is adb90</string>
 						</array>
 						<key>Custom PS2 Map</key>
-						<array>
-							<string>e01e=e037;Map tp disable to Fn+f3</string>
-							<string>e037=e01e;Prevent PrntScr from triggering tp disable</string>
-						</array>
+						<array/>
 						<key>Function Keys Special</key>
 						<array>
 							<string>;The following 12 items map Fn+fkeys to fkeys</string>
 							<string>e06e=3b</string>
 							<string>e008=3c</string>
-							<string>e01e=3d</string>
+							<string>e01e=e0f1;Map acpi RKA1 to Fn+f3</string>
+							<string>;e037=3d</string>
 							<string>e005=3e</string>
 							<string>e006=3f</string>
-							<string>e00c=40</string>
+							<string>e00c=e0f2;Map acpi RKA2 to Fn+f6</string>
 							<string>;Fn+f7 no dedicated macro</string>
 							<string>e010=42</string>
 							<string>e022=43</string>
@@ -157,7 +160,7 @@
 							<string>;The following 12 items map fkeys to Fn+fkeys</string>
 							<string>3b=e06e;Map vidmirror key to f1</string>
 							<string>3c=e0f0;Map radio toggle action from EC query to f2</string>
-							<string>3d=e037;Map touchpad toggle button to f3</string>
+							<string>3d=e01e;Map touchpad toggle button to f3</string>
 							<string>3e=e005;Map brightness down to f4 </string>
 							<string>3f=e006;Map brightness up to f5</string>
 							<string>40=e0f3;Map acpi RKA3 to f6 keyboard backlight</string>
@@ -173,7 +176,7 @@
 							<string>;The following 12 items map Fn+fkeys to Fn+fkeys</string>
 							<string>e06e=e06e;Fn+f1 macro translated</string>
 							<string>e008=e008;Fn+f2 regular scancode and EC query call q8c</string>
-							<string>e01e=e037;Fn+f3 regular scancode and EC controls LED</string>
+							<string>e01e=e01e;Fn+f3 regular scancode and EC controls LED</string>
 							<string>e005=e005;Fn+f4 no ps2scancode and EC query call q81</string>
 							<string>e006=e006;Fn+f5 no ps2scancode and EC query call q80</string>
 							<string>e00c=e00c;Fn+f6 no ps2scancode and EC query call q8a</string>
@@ -202,9 +205,15 @@
 						<array>
 							<string>;This section maps ps2 codes (packet format) received quickly (macros) into fake ps2 codes (packet format)</string>
 							<string>;Fn+F1</string>
-							<data>//8CbgAAAAACWwEZ</data>
-							<data>//8C7gAAAAAC2wGZ</data>
-							<data>//8C7gAAAAABmQLb</data>
+							<data>
+							//8CbgAAAAACWwEZ
+							</data>
+							<data>
+							//8C7gAAAAAC2wGZ
+							</data>
+							<data>
+							//8C7gAAAAABmQLb
+							</data>
 						</array>
 						<key>MaximumMacroTime</key>
 						<integer>35000000</integer>
@@ -629,23 +638,47 @@
 						<array>
 							<string>;This section maps ps2 codes (packet format) received quickly (macros) into fake ps2 codes (packet format)</string>
 							<string>;Fn+F4</string>
-							<data>//8CZAAAAAABOAE+</data>
-							<data>//8C5AAAAAABvgG4</data>
+							<data>
+							//8CZAAAAAABOAE+
+							</data>
+							<data>
+							//8C5AAAAAABvgG4
+							</data>
 							<string>;F5 (without Fn)</string>
-							<data>//8CZQEAAAABPw==</data>
-							<data>//8C5QEAAAABvw==</data>
+							<data>
+							//8CZQEAAAABPw==
+							</data>
+							<data>
+							//8C5QEAAAABvw==
+							</data>
 							<string>;Fn+Ctrl+F6</string>
-							<data>//8CJwAD//8CZg==</data>
-							<data>//8CpwAD//8C5g==</data>
+							<data>
+							//8CJwAD//8CZg==
+							</data>
+							<data>
+							//8CpwAD//8C5g==
+							</data>
 							<string>;Ctrl+F6</string>
-							<data>//8CJwAD//8CQA==</data>
-							<data>//8CpwAD//8CwA==</data>
+							<data>
+							//8CJwAD//8CQA==
+							</data>
+							<data>
+							//8CpwAD//8CwA==
+							</data>
 							<string>;Fn+F8</string>
-							<data>//8CaAAAAAACHQE4AQ8=</data>
-							<data>//8C6AAAAAABjwG4Ap0=</data>
+							<data>
+							//8CaAAAAAACHQE4AQ8=
+							</data>
+							<data>
+							//8C6AAAAAABjwG4Ap0=
+							</data>
 							<string>;Fn+F10</string>
-							<data>//8CagAAAAACWwEZ</data>
-							<data>//8C6gAAAAABmQLb</data>
+							<data>
+							//8CagAAAAACWwEZ
+							</data>
+							<data>
+							//8C6gAAAAABmQLb
+							</data>
 						</array>
 						<key>Macro Translation</key>
 						<array>
