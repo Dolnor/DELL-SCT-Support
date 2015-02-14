@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>14A361c</string>
+	<string>14A388a</string>
 	<key>CFBundleExecutable</key>
 	<string>VoodooPS2Controller</string>
 	<key>CFBundleGetInfoString</key>
@@ -71,6 +71,14 @@
 			<string>IOPlatformDevice</string>
 			<key>Platform Profile</key>
 			<dict>
+				<key>DELL</key>
+				<dict>
+					<key>SNB-CPT</key>
+					<dict>
+						<key>WakeDelay</key>
+						<integer>0</integer>
+					</dict>
+				</dict>
 				<key>Default</key>
 				<dict>
 					<key>WakeDelay</key>
@@ -127,6 +135,10 @@
 					<string>Haswell-Ideapad</string>
 				</dict>
 			</dict>
+			<key>RM,Build</key>
+			<string>Release-timewalker</string>
+			<key>RM,Version</key>
+			<string>VoodooPS2Controller 1.8.13</string>
 		</dict>
 	</dict>
 	<key>OSBundleCompatibleVersion</key>

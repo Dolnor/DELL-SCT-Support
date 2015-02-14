@@ -1,6 +1,6 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1343\cocoasubrtf140
+{\rtf1\ansi\ansicpg1252\cocoartf1347\cocoasubrtf130
 {\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;\red217\green11\blue0;}
+{\colortbl;\red255\green255\blue255;\red217\green11\blue0;\red255\green39\blue18;}
 \paperw11900\paperh16840\margl1440\margr1440\vieww21000\viewh10260\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
@@ -25,6 +25,30 @@ The original discussion and support thread:\
 
 \b Change Log:\
 \
+Version 1.1.2 (February 14th, 2015):\
+\
+
+\b0 - Clover updated to rev.3167 (boot up text removed)\
+- HWSensors and HWMonitor updated to 6.14.1364, HWMonitor fixed to display fan sensors\
+- ACPIBatteryManager updated to 1.55\
+- ACID (AC Adapter Information) added to FakeSMC to prevent powerd spam\
+- CodecCommander updated with changes by @darkvoid, custom user commands and user client (hdaverb-like) now available for experimentation\
+- VoodooPS2Keyboard mapping changes to exclude RKA1/RKA2 methods\
+- VoodooPS2Trackpad SwapDoubleTriple has been set to No, which previously was deliberately enabled. Right click now is 2 finger tap, middle click - 3 finger tap.\
+- Backlight control ACPI rewritten, original Q80 and Q81 EC Queries are no longer used and have been substituted with SAVE method on PNLF\
+- Backlight levels in OSX scale with BIOS levels - no more screen flashing and backlight dimming during cold/soft boots\
+- CMO 1464 Display Profile updated with MacBook Pro 2012 Gamma override\
+- Handoff + Continuity kext patch added for OSX 10.10.2 (applicable to cards that use Broadcom4360)\
+- LoginWindow artifact kext patches added for OSX 10.10.2\
+- LoginWindow hook that tethered nvram save script to logout has been removed (don\'92t need it anymore)\
+\
+P.S. Due to the nature of new Apple authentication,\cf2  this package can\cf3  no longer guarantee an out-of-the-box solution for Messages/Facetime
+\b \cf0 \
+\
+N.B. 
+\b0 If your laptop behaves really slow (kernel_task takes all the CPU load) and temperatures are sky rocketing over 80C - reflash your BIOS using Pflash.efi method, but specify /cvar flag in startup.nsh to clear NVRAM store! This may happen after getting rid of EmuVariable driver with previous releases of the package.
+\b \
+\
 Version 1.1.1 (September 28th, 2014):\
 \
 
@@ -42,10 +66,7 @@ Version 1.1.1 (September 28th, 2014):\
 \i0 \cf0 , by default SCT Package will set the mode to 7 (same as default mode 3, but with encryption disabled, because it\'92s not working on hackintoshes). You can still disable hibernation by choosing respective entry in Installation Customization if you really need those 4 Gb of space and care for SSD life that will outlive your laptop.\
 - Fix VoodooPS2Daemon installing in invalid directory \
 - Fix AW-NB290 SSDT-3 not being patched properly for L702x\
-\
-
-\b N.B. 
-\b0 If your laptop behaves really slow (kernel_task takes all the CPU load) and temperatures are sky rocketing over 80C - reflash your BIOS using Pflash.efi method, but specify /cvar flag in startup.nsh to clear NVRAM store! This may happen after getting rid of EmuVariable driver with previous release of the package.
+- Dropping DMAR table for machines with VT-d support (core i7 based)
 \b \
 \
 Version 1.1.0 (September 5th, 2014):\

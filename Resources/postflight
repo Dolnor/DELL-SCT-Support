@@ -105,13 +105,6 @@ then
     rm /private/etc/rc.local
 fi
 
-# in 10.10 Beta 1 use loginwindow hooks which execute RC scripts
-# though hooks have been officially deprecated since 10.4 ...
-if [ ${osver} == '10.10' -o ${osver%??} == '10.10' ]
-then
-    defaults write com.apple.loginwindow LogoutHook /private/etc/rc.shutdown.d/80.save_nvram_plist.local
-fi
-
 ## unmount EFI System partition
 efi_disk=$( df / | sed -n '2p' | awk '{print $1}' )
 efi_mp="/Volumes/EFI"

@@ -111,6 +111,9 @@ DefinitionBlock ("SSDT-2.aml", "SSDT", 2, "DELL ", "SsdtIGPU", 0x00001000)
     External (_SB_.PCI0.SATA, DeviceObj)
     External (_SB_.PCI0.SBUS, DeviceObj)
     External (IGDS, IntObj)
+    External (BRGA, IntObj) //brightness on AC power
+    External (BRGD, IntObj) //brightness on DC power
+    External (PWRS, IntObj) //active power source
 
     Scope (\)
     {
@@ -142,10 +145,9 @@ DefinitionBlock ("SSDT-2.aml", "SSDT", 2, "DELL ", "SsdtIGPU", 0x00001000)
             Name (_UID, 0x0A)  // _UID: Unique ID
             Name (_STA, 0x0B)  // _STA: Status
             
-            //define hardware register access for brightness
-            // you can see BAR1 value in RW-Everything under Bus00,02 Intel VGA controler PCI
-            // Note: Not sure which one is right here... for now, going with BAR1 minus 4
-            OperationRegion (BRIT, SystemMemory, Subtract (\_SB.PCI0.IGPU.BAR1, 0x04), 0x000E1184)
+			// define hardware register access for brightness
+			// lower nibble of BAR1 is status bits and not part of the address
+            OperationRegion (BRIT, SystemMemory, And(\_SB.PCI0.IGPU.BAR1, Not(0xF)), 0xe1184)
             Field (BRIT, AnyAcc, Lock, Preserve)
             {
                 Offset (0x48250), 
@@ -159,103 +161,111 @@ DefinitionBlock ("SSDT-2.aml", "SSDT", 2, "DELL ", "SsdtIGPU", 0x00001000)
                 Offset (0xE1180), 
                 PCHL,   32
             }
-
+		
+            Name (STPS, 0x04)  // STPS: number of steps in between for one level
+            Name (LMAX, 0x00)  // LMAX: use 0x710 to force OS X value .. any other value or 0 to capture BIOS settings
+            Name (KMAX, 0x710) // KMAX: defines the unscaled range in the _BCL table below
+            Name (KPCH, 0) // KPCH: saved value for PCHL
             Name (XOPT, Zero) // Use XOPT=1 to disable smooth transitions
             Name (XRGL, 0x28) // XRGL/XRGH: defines the valid range
             Name (XRGH, 0x0710)
             Name (KLVX, 0x07100000) // KLVX is initialization value for LEVX
             
-            // _BCL: returns list of valid brightness levels
-            // first two entries describe ac/battery power levels
-            // the range is set to comply with what windows sets - 6% to 90% with 6% icrements, then 100%
+            Name (CBAR, Package ()  // Cold Boot BIOS Backlight Levels
+            {
+                0x06, 0x06, 0x0C, 0x12, 0x18, 0x1E, 0x24, 0x2A, 0x30,
+                0x36, 0x3C, 0x42, 0x48, 0x4E, 0x54, 0x5A, 0x64 
+            })
+            
+            Name (ECAR, Package ()  // EC Backlight Levels
+            {
+                0x00, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 
+                0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F 
+            })
+            
             Name (_BCL, Package (0x43)  // _BCL: Brightness Control Levels
             {
-                0x0710, 
-                0x01DF, 
-                Zero, 
-                0x06, 
-                0x24, 
-                0x48, 
-                0x6C, 
-                0x72, 
-                0x90, 
-                0xB4, 
-                0xD8, 
-                0xDE, 
-                0xFC, 
-                0x0120, 
-                0x0144, 
-                0x014A, 
-                0x0168, 
-                0x018C, 
-                0x01B0, 
-                0x01B6, 
-                0x01D4, 
-                0x01F8, 
-                0x021C, 
-                0x0222, 
-                0x0240, 
-                0x0264, 
-                0x0288, 
-                0x028E, 
-                0x02AC, 
-                0x02D0, 
-                0x02F4, 
-                0x02FA, 
-                0x0318, 
-                0x032C, 
-                0x0360, 
-                0x0366, 
-                0x0384, 
-                0x03A8, 
-                0x03CC, 
-                0x03D2, 
-                0x03F0, 
-                0x0414, 
-                0x0438, 
-                0x043E, 
-                0x045C, 
-                0x0480, 
-                0x04A4, 
-                0x04AA, 
-                0x04C8, 
-                0x04EC, 
-                0x0510, 
-                0x0516, 
-                0x0534, 
-                0x0558, 
-                0x057C, 
-                0x0582, 
-                0x05A0, 
-                0x05C4, 
-                0x05E8, 
-                0x05EE, 
-                0x060C, 
-                0x0630, 
-                0x0654, 
-                0x066D, 
-                0x06A2, 
-                0x06D9, 
-                0x0710
+                1807, 479, //ac + dc level group
+                0, 229, 254, 279, 304, //0x00 level group
+                329, 354, 379, 404, //0x01 level group
+                429, 454, 479, 504, //0x02 level group
+                529, 554, 579, 604, //0x03 level group
+                629, 654, 679, 704, //0x04 level group
+                729, 754, 779, 804, //0x05 level group
+                829, 854, 879, 904, //0x06 level group
+                929, 954, 979, 1004, //0x07 level group
+                1029, 1054, 1079, 1104, //0x08 level group
+                1129, 1154, 1179, 1204, //0x09 level group
+                1229, 1254, 1279, 1304, //0x0a level group
+                1329, 1354, 1379, 1404, //0x0b level group
+                1429, 1454, 1479, 1504, //0x0c level group
+                1529, 1554, 1579, 1604, //0x0d level group
+                1629, 1654, 1679, 1704, //0x0e level group
+                1729, 1754, 1779, 1808  //0x0f level group
             })
             
             // _INI deals with differences between native setting and desired
-            Method (_INI, 0, NotSerialized)  // _INI: Initialize
-            {
-                Store (ShiftRight (KLVX, 0x10), Local0)
-                Store (ShiftRight (LEVX, 0x10), Local1)
-                If (LNotEqual (Local0, Local1))
-                {
-                    Divide (Multiply (LEVL, Local0), Local1, , Local0)
-                    Store (Local0, LEVL)
-                    Store (KLVX, LEVX)
-                }
-            }
+			Method (_INI, 0, NotSerialized)
+			{
+                // save value of PCHL for later
+				Store(PCHL, KPCH)
+				// determine LMAX to use
+				If (LNot(LMAX)) 
+				{ 
+					Store(ShiftRight(LEVX,16), LMAX) 
+				}
+				If (LNot(LMAX)) 
+				{ 
+					Store(KMAX, LMAX) 
+				}
+				Store(ShiftLeft(LMAX,16), KLVX)
+				If (LNotEqual(LMAX, KMAX))
+				{
+					// scale all the values in _BCL to the PWM max in use
+					Store(0, Local0)
+					While (LLess(Local0,SizeOf(_BCL)))
+					{
+						Store(DerefOf(Index(_BCL,Local0)), Local1)
+						Divide(Multiply(Local1,LMAX), KMAX,, Local1)
+						Store(Local1, Index(_BCL,Local0))
+						Increment(Local0)
+					}
+					// also scale XRGL and XRGH values
+					Divide(Multiply(XRGL,LMAX), KMAX,, XRGL)
+					Divide(Multiply(XRGH,LMAX), KMAX,, XRGH)
+				}
+				// adjust values to desired LMAX
+				Store(ShiftRight(LEVX,16), Local1)
+				If (LNotEqual(Local1, LMAX))
+				{
+					Store(LEVL, Local0)
+					If (LOr(LNot(Local0),LNot(Local1))) 
+					{ 
+						Store(LMAX, Local0) Store(LMAX, Local1) 
+					}
+					Divide(Multiply(Local0,LMAX), Local1,, Local0)
+					//REVIEW: wait for vblank before setting new PWM config
+					//Store(P0BL, Local7)
+					//While (LEqual (P0BL, Local7)) {}
+					If (LGreater(LEVL, LMAX))
+					{ 
+						Store(KLVX, LEVX) Store(Local0,LEVL) 
+					}
+					Else
+					{ 
+						Store(Local0,LEVL) Store(KLVX, LEVX) 
+					}
+				}
+			}
             
             // _BCM/_BQC: set/get for brightness level in regular control mode
             Method (_BCM, 1, NotSerialized)  // _BCM: Brightness Control Method
             {
                 // initialize for consistent backlight level before/after sleep
+                If (LNotEqual(PCHL, KPCH)) 
+                { 
+                    Store(KPCH, PCHL) 
+                }
                 If (LNotEqual (LEVW, 0x80000000))
                 {
                     Store (0x80000000, LEVW)
@@ -267,7 +277,7 @@ DefinitionBlock ("SSDT-2.aml", "SSDT", 2, "DELL ", "SsdtIGPU", 0x00001000)
                 }
                 // store new backlight level
                 Store (Match (_BCL, MGE, Arg0, MTR, Zero, 0x02), Local0)
-                If (LEqual (Local0, Ones))
+                If (LEqual (Local0,Ones))
                 {
                     Subtract (SizeOf (_BCL), One, Local0)
                 }
@@ -278,22 +288,19 @@ DefinitionBlock ("SSDT-2.aml", "SSDT", 2, "DELL ", "SsdtIGPU", 0x00001000)
                 }
 
                 Store (DerefOf (Index (_BCL, Local0)), LEVL)
-                
-                // write set level into IGPU register so that EC could determine backlight level in BIOS after reboot
-                \_SB.PNLF.BSET (\_SB.PNLF.LEVL)
             }
-
+			
             Method (_BQC, 0, NotSerialized)  // _BQC: Brightness Query Current
             {
                 Store (Match (_BCL, MGE, LEVL, MTR, Zero, 0x02), Local0)
-                If (LEqual (Local0, Ones))
+                If (LEqual (Local0,Ones))
                 {
                     Subtract (SizeOf (_BCL), One, Local0)
                 }
 
                 Return (DerefOf (Index (_BCL, Local0)))
             }
-
+			
             Method (_DOS, 1, NotSerialized)  // _DOS: Disable Output Switching
             {
                 ^^PCI0.IGPU._DOS (Arg0)
@@ -303,6 +310,10 @@ DefinitionBlock ("SSDT-2.aml", "SSDT", 2, "DELL ", "SsdtIGPU", 0x00001000)
             Method (XBCM, 1, NotSerialized)
             {
                 // initialize for consistent backlight level before/after sleep
+                If (LNotEqual(PCHL, KPCH)) 
+                { 
+                    Store(KPCH, PCHL) 
+                }
                 If (LNotEqual (LEVW, 0x80000000))
                 {
                     Store (0x80000000, LEVW)
@@ -330,120 +341,52 @@ DefinitionBlock ("SSDT-2.aml", "SSDT", 2, "DELL ", "SsdtIGPU", 0x00001000)
                 }
 
                 Store (Arg0, LEVL)
-                
-                // write set level into IGPU register for later EC query
-                \_SB.PNLF.BSET (\_SB.PNLF.LEVL)
             }
 
             Method (XBQC, 0, NotSerialized)
             {
                 Store (LEVL, Local0)
-                If (LGreater (Local0, XRGH))
+                If (LGreater (Local0,XRGH))
                 {
                     Store (XRGH, Local0)
                 }
 
-                If (LAnd (Local0, LLess (Local0, XRGL)))
+                If (LAnd (Local0,LLess (Local0,XRGL)))
                 {
                     Store (XRGL, Local0)
                 }
 
                 Return (Local0)
             }
-
-            // sets brightness into CBLV register in order to prevent BIOS from starting with full brightness after reboot
-            // EC original queries _Q80 and _Q80 will parse the value from CBLV and perform AND 0xFF on it, 
-            // then decrement result by 1 on brightness down event and increment by 1 on brightness up event.
-            Method (BSET, 1, NotSerialized)
+            
+            // preserve brightness level for BIOS
+            Method (SAVE, 1, NotSerialized)
             {
-                Store (Zero, Local0)
-                Store (Arg0, Local0)
-                If (LAnd (LGreaterEqual (Local0, Zero), LLess (Local0, 0x48)))
+                // get level position in _BCL array
+                Store (Match (_BCL, MGE, Arg0, MTR, Zero, 0x02), Local0)
+                If (LEqual (Local0,Ones))
                 {
-                    Store (0x80000006, Local1)
+                    Subtract (SizeOf (_BCL), One, Local0)
                 }
-
-                If (LAnd (LGreaterEqual (Local0, 0x48), LLess (Local0, 0xB4)))
+                
+                // divide index by the number of steps for one level
+                // determine reg values for cold boot level consistency
+                Divide (Local0, STPS,, Local0)
+                Store (DerefOf (Index (ECAR, Local0)), Local1)
+                Store (DerefOf (Index (CBAR, Local0)), Local2)
+                Xor (Local2, 0x80000000, Local2)
+                
+                // write register values
+                Store (Local2, \_SB.PCI0.IGPU.CBLV)
+                // determine power source used, different regs for ac/dc power
+                If (PWRS) 
                 {
-                    Store (0x80000006, Local1)
+                    Store (Local1,BRGA)
                 }
-
-                If (LAnd (LGreaterEqual (Local0, 0xB4), LLess (Local0, 0x0120)))
+                Else 
                 {
-                    Store (0x8000000C, Local1)
+                    Store (Local1,BRGD)
                 }
-
-                If (LAnd (LGreaterEqual (Local0, 0x0120), LLess (Local0, 0x018C)))
-                {
-                    Store (0x80000012, Local1)
-                }
-
-                If (LAnd (LGreaterEqual (Local0, 0x018C), LLess (Local0, 0x01F8)))
-                {
-                    Store (0x80000018, Local1)
-                }
-
-                If (LAnd (LGreaterEqual (Local0, 0x01F8), LLess (Local0, 0x0264)))
-                {
-                    Store (0x8000001E, Local1)
-                }
-
-                If (LAnd (LGreaterEqual (Local0, 0x0264), LLess (Local0, 0x02D0)))
-                {
-                    Store (0x80000024, Local1)
-                }
-
-                If (LAnd (LGreaterEqual (Local0, 0x02D0), LLess (Local0, 0x032C)))
-                {
-                    Store (0x8000002A, Local1)
-                }
-
-                If (LAnd (LGreaterEqual (Local0, 0x032C), LLess (Local0, 0x03A8)))
-                {
-                    Store (0x80000030, Local1)
-                }
-
-                If (LAnd (LGreaterEqual (Local0, 0x03A8), LLess (Local0, 0x0414)))
-                {
-                    Store (0x80000036, Local1)
-                }
-
-                If (LAnd (LGreaterEqual (Local0, 0x0414), LLess (Local0, 0x0480)))
-                {
-                    Store (0x8000003C, Local1)
-                }
-
-                If (LAnd (LGreaterEqual (Local0, 0x0480), LLess (Local0, 0x04EC)))
-                {
-                    Store (0x80000042, Local1)
-                }
-
-                If (LAnd (LGreaterEqual (Local0, 0x04EC), LLess (Local0, 0x0558)))
-                {
-                    Store (0x80000048, Local1)
-                }
-
-                If (LAnd (LGreaterEqual (Local0, 0x0558), LLess (Local0, 0x05C4)))
-                {
-                    Store (0x8000004E, Local1)
-                }
-
-                If (LAnd (LGreaterEqual (Local0, 0x05C4), LLess (Local0, 0x0630)))
-                {
-                    Store (0x80000054, Local1)
-                }
-
-                If (LAnd (LGreaterEqual (Local0, 0x0630), LLess (Local0, 0x06D9)))
-                {
-                    Store (0x8000005A, Local1)
-                }
-
-                If (LOr (LGreaterEqual (Local0, 0x06D9), LEqual (Local0, 0x0710)))
-                {
-                    Store (0x80000064, Local1)
-                }
-                // we write to CBLV so original _Q80 and _Q81 could perform AND 0xFF on it and get values from 0 to 64.
-                Store (Local1, \_SB.PCI0.IGPU.CBLV) 
             }
         }
         
@@ -659,22 +602,7 @@ DefinitionBlock ("SSDT-2.aml", "SSDT", 2, "DELL ", "SsdtIGPU", 0x00001000)
                     \_SB.PCI0.LPCB.EC0._O8C ()
                 }
             }
-            // brightness up event
-            Method (RKA1, 1, NotSerialized)
-            {
-                If (LNot(Arg0))
-                {
-                    \_SB.PCI0.LPCB.EC0._O80 ()
-                }
-            }
-            // brightness down event
-            Method (RKA2, 1, NotSerialized)
-            {
-                If (LNot(Arg0))
-                {
-                    \_SB.PCI0.LPCB.EC0._O81 ()
-                }
-            }
+
             // control keyboard backlight in special f-key mode
             Method (RKA3, 1, NotSerialized)
             {
@@ -746,14 +674,12 @@ DefinitionBlock ("SSDT-2.aml", "SSDT", 2, "DELL ", "SsdtIGPU", 0x00001000)
             {
                 Notify (PS2K, 0x0206)
                 Notify (PS2K, 0x0286)
-                \_SB.PCI0.LPCB.EC0._O80 ()
             }
             // this will be called when Fn+F4 is pressed
             Method (_Q81, 0, NotSerialized)  // _Qxx: EC Query
             {
                 Notify (PS2K, 0x0205)
                 Notify (PS2K, 0x0285)
-                \_SB.PCI0.LPCB.EC0._O81 ()
             }
             // this will be called when Fn+F6 is pressed
             Method (_Q8A, 0, NotSerialized)  // _Qxx: EC Query

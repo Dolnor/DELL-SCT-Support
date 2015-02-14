@@ -13,7 +13,7 @@
 		<key>Timeout</key>
 		<integer>2</integer>
 		<key>DefaultVolume</key>
-		<string>Macintosh HD</string>
+		<string>LastBootedVolume</string>
 	</dict>
 	<key>KernelAndKextPatches</key>
 	<dict>
@@ -21,6 +21,36 @@
 		<false/>
 		<key>KextsToPatch</key>
 		<array>
+			<dict>
+				<key>Comment</key>
+				<string>BCM Handoff</string>
+				<key>Name</key>
+				<string>IOBluetoothFamily</string>
+				<key>Find</key>
+				<data>SIXAdFwPt0gQ</data>
+				<key>Replace</key>
+				<data>Qb4PAAAA61kQ</data>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>LoginWindow White</string>
+				<key>Name</key>
+				<string>IOGraphicsFamily</string>
+				<key>Find</key>
+				<data>hcB0a0g=</data>
+				<key>Replace</key>
+				<data>McB0W0g=</data>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>LoginWindow Black</string>
+				<key>Name</key>
+				<string>IOGraphicsFamily</string>
+				<key>Find</key>
+				<data>QYjE6xE=</data>
+				<key>Replace</key>
+				<data>QYjE6zE=</data>
+			</dict>
 			<dict>
 				<key>Comment</key>
 				<string>XHCI - eliminate chip make check</string>
@@ -167,6 +197,8 @@
 	<dict>
 		<key>InjectSystemID</key>
 		<true/>
+		<key>InjectKexts</key>
+		<string>Detect</string>
 	</dict>
 	<key>SMBIOS</key>
 	<dict>
@@ -247,6 +279,10 @@
 				<string>SSDT</string>
 				<key>TableId</key>
 				<string>PtidDevc</string>
+			</dict>
+			<dict>
+				<key>Signature</key>
+				<string>DMAR</string>
 			</dict>
 		</array>
 		<key>DSDT</key>
@@ -476,12 +512,6 @@
 	<dict>
 		<key>MLB</key>
 		<string>fffffffffffffDH2L</string>
-		<key>MountEFI</key>
-		<false/>
-		<key>LogEveryBoot</key>
-		<string>10</string>
-		<key>LogLineCount</key>
-		<integer>3000</integer>
 	</dict>
 </dict>
 </plist>
