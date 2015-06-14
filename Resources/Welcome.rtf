@@ -1,4 +1,4 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1347\cocoasubrtf130
+{\rtf1\ansi\ansicpg1252\cocoartf1347\cocoasubrtf570
 {\fonttbl\f0\fswiss\fcharset0 Helvetica;}
 {\colortbl;\red255\green255\blue255;\red217\green11\blue0;\red255\green39\blue18;}
 \paperw11900\paperh16840\margl1440\margr1440\vieww21000\viewh10260\viewkind0
@@ -25,6 +25,28 @@ The original discussion and support thread:\
 
 \b Change Log:\
 \
+Version 1.1.3 (June 14th, 2015):\
+\
+
+\b0 - Fixed an issue where installer would crash with error\
+- Added progress logging  (see Console > Library/Logs/SCT)\
+- Now retaining value of ROM data from RtVariables when installing as an update\
+- Clover updated to rev.3228\
+- HWSensors and HWMonitor updated to 6.16.1372 /w Fan Fix\
+- CodecCommander updated to 2.4.0\
+- Included hdaverb binary for audio codec debugging\
+- RealtekRTL8111 updated to 2.0.0d2
+\b \
+
+\b0 - VoodooPS2 updated to 1.8.15\
+\
+P.S. Due to the nature of new Apple authentication,\cf2  this package can\cf3  no longer guarantee an out-of-the-box solution for Messages/Facetime
+\b \cf0 \
+\
+N.B. 
+\b0 If your laptop behaves really slow (kernel_task takes all the CPU load) and temperatures are sky rocketing over 80C - reflash your BIOS using Pflash.efi method, but specify /cvar flag in startup.nsh to clear NVRAM store! This may happen after getting rid of EmuVariable driver with previous releases of the package.
+\b \
+\
 Version 1.1.2 (February 14th, 2015):\
 \
 
@@ -41,13 +63,7 @@ Version 1.1.2 (February 14th, 2015):\
 - CMO 1464 Display Profile updated with MacBook Pro 2012 Gamma override\
 - Handoff + Continuity kext patch added for OSX 10.10.2 (applicable to cards that use Broadcom4360)\
 - LoginWindow artifact kext patches added for OSX 10.10.2\
-- LoginWindow hook that tethered nvram save script to logout has been removed (don\'92t need it anymore)\
-\
-P.S. Due to the nature of new Apple authentication,\cf2  this package can\cf3  no longer guarantee an out-of-the-box solution for Messages/Facetime
-\b \cf0 \
-\
-N.B. 
-\b0 If your laptop behaves really slow (kernel_task takes all the CPU load) and temperatures are sky rocketing over 80C - reflash your BIOS using Pflash.efi method, but specify /cvar flag in startup.nsh to clear NVRAM store! This may happen after getting rid of EmuVariable driver with previous releases of the package.
+- LoginWindow hook that tethered nvram save script to logout has been removed (don\'92t need it anymore)
 \b \
 \
 Version 1.1.1 (September 28th, 2014):\

@@ -1,13 +1,17 @@
 #!/bin/bash
+logfil="/Library/Logs/SCT/sct_install_`date +%Y%m%d`.log"
+
+echo "----------- Common Files Pre-Installation Start -----------" >> $logfil
 
 ## remove custom HDA resources (if any) before installing new ones
 hda_rsrc1="${3}/System/Library/Extensions/AppleHDA.kext/Contents/Resources/layout28.aml.zlib"
-hda_rsrc2="${3}/System/Library/Extensions/AppleHDA.kext/Contents/Resources/Platforms.aml.zlib"
+hda_rsrc2="${3}/System/Library/Extensions/AppleHDA.kext/Contents/Resources/layout65.aml.zlib"
+hda_rsrc3="${3}/System/Library/Extensions/AppleHDA.kext/Contents/Resources/Platforms.aml.zlib"
 
-if [[ -e ${hda_rsrc1} && -e ${hda_rsrc1} ]]
-then
-    rm ${hda_rsrc1}
-    rm ${hda_rsrc2}
-fi
+rm -f ${hda_rsrc1}
+rm -f ${hda_rsrc2}
+rm -f ${hda_rsrc3}	
 
 sh ./backup.sh ./list ${3}
+echo "------------ Common Files Pre-Installation End -------------" >> $logfil
+echo "" >> $logfil

@@ -1,9 +1,14 @@
 #!/bin/bash
+logfil="/Library/Logs/SCT/sct_install_`date +%Y%m%d`.log"
+echo "-------------- DELL SCT Post-Installation Start -----------" >> $logfil
 
 sle="${3}/System/Library/Extensions"
+echo "$(date +%T): using sle path $sle" >> $logfil
 osver=`sw_vers -productVersion`
+echo "$(date +%T): got os version - $osver" >> $logfil
 
 # rebilding kernelcache
+echo "$(date +%T): $sle touched to rebuild kernelcache" >> $logfil
 touch "${sle}"
 
 ## generate serail numbers
@@ -15,6 +20,8 @@ c17="${3}/tmp/config-17.plist"
 
 ## check dell system type and select serial number identifier according to screen size
 dell_system=$( /usr/libexec/PlistBuddy -c "Print DellSystem" ${backup} )
+
+echo "$(date +%T): got Dell model definition - $dell_system" >> $logfil
 
     if [ ${dell_system} -eq 14 ]
     then
@@ -31,10 +38,14 @@ dell_system=$( /usr/libexec/PlistBuddy -c "Print DellSystem" ${backup} )
         suid="DF92"
     fi
 
+	echo "$(date +%T): will be using $suid postfix for serial if not previously backed up" >> $logfil
+	
     if [ -e $backup ]
     then
         serial=$( /usr/libexec/PlistBuddy -c "Print SMBIOS:SerialNumber" ${backup} )
         boardserial=$( /usr/libexec/PlistBuddy -c "Print SMBIOS:BoardSerialNumber" ${backup} )
+        rom=$( /usr/libexec/PlistBuddy -c "Print RtVariables:ROM" ${backup} )
+		echo "$(date +%T): backup of serial data exists - $serial, $boardserial" >> $logfil
     else
         week=CDFGHJKLMNPQRTVWXY12345678
         chars=ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890
@@ -42,29 +53,47 @@ dell_system=$( /usr/libexec/PlistBuddy -c "Print DellSystem" ${backup} )
         function random_char { echo ${chars:$(($RANDOM%${#chars})):1}; }
         serial="SG2F"$week_letter$(random_char)$(random_char)$(random_char)$suid
         boardserial="SG2F"$week_letter$(random_char)$(random_char)$(random_char)$(random_char)$(random_char)$(random_char)$(random_char)$(random_char)$suid
+		echo "$(date +%T): generated brand new serials - $serial, $boarserial" >> $logfil
     fi
 
-/usr/libexec/PlistBuddy -c "Set SMBIOS:SerialNumber $serial" ${config}
-/usr/libexec/PlistBuddy -c "Set SMBIOS:BoardSerialNumber $boardserial" ${config}
-/usr/libexec/PlistBuddy -c "Set RtVariables:MLB $boardserial" ${config}
+if [ ! -z $serial ]; then
+	/usr/libexec/PlistBuddy -c "Set SMBIOS:SerialNumber $serial" ${config}
+else
+	echo "$(date +%T): serial is empty for some reason - this will cause trouble" >> $logfil
+fi
+if [ ! -z $boardserial ]; then
+	/usr/libexec/PlistBuddy -c "Set SMBIOS:BoardSerialNumber $boardserial" ${config}
+	/usr/libexec/PlistBuddy -c "Set RtVariables:MLB $boardserial" ${config}
+else
+	echo "$(date +%T): board serial is empty for some reason - this will cause trouble" >> $logfil
+fi
+if [ ! -z $rom ]; then
+	/usr/libexec/PlistBuddy -c "Add RtVariables:ROM data $rom" ${config}
+else
+	echo "$(date +%T): couldn't get ROM valus - this will cause trouble" >> $logfil
+fi
 
 ## copy network kexts to ESP
 if [ -r "${sle}/RealtekRTL8111.kext" ];
 then
-    cp -Rf "${sle}/RealtekRTL8111.kext" "${efi}/EFI/CLOVER/kexts/Other/RealtekRTL8111.kext"
+    echo "$(date +%T): system uses gigabit ethernet, copied RealtekRTL8111 to mapped efi partition" >> $logfil
+	cp -Rf "${sle}/RealtekRTL8111.kext" "${efi}/EFI/CLOVER/kexts/Other/RealtekRTL8111.kext"
 fi
 
 if [ -r "${sle}/RealtekRTL8100.kext" ];
 then
+    echo "$(date +%T): system uses fast ethernet, copied RealtekRTL8100 to mapped efi partition" >> $logfil
     cp -Rf "${sle}/RealtekRTL8100.kext" "${efi}/EFI/CLOVER/kexts/Other/RealtekRTL8100.kext"
 fi
 
 ## compile and copy ACPI tables to ESP
 if [ -r "${3}/tmp/ACPI" ];
 then
-    ## patch rootport number for XPS17
+    echo "$(date +%T): acpi tables will now be compiled ..." >> $logfil
+	## patch rootport number for XPS17
     if [ ${dell_system} -eq 17 ]
     then
+		echo "$(date +%T): xps rootport patches required" >> $logfil
         if [ -e /tmp/ACPI//SSDT-3-BCM1.dsl ]
         then
             ssdt_arpt="${3}/tmp/ACPI/SSDT-3-BCM1.dsl"
@@ -81,19 +110,22 @@ then
         fi
 
         ${3}/tmp/ACPI/patchmatic ${ssdt_arpt} ${3}/tmp/ACPI/arpt_17.txt ${ssdt_arpt}
+		echo "$(date +%T): xps rootport patches for $ssdt_arpt applied" >> $logfil
     fi
 
     ${3}/tmp/ACPI/iasl ${3}/tmp/ACPI/*.dsl
+	echo "$(date +%T): compilation successful" >> $logfil
 
     acpi="${efi}/EFI/CLOVER/ACPI/patched/"
    #cp "${3}/tmp/ACPI/DSDT.aml"   "${acpi}"
     cp "${3}/tmp/ACPI/SSDT-1.aml" "${acpi}"
     cp "${3}/tmp/ACPI/SSDT-2.aml" "${acpi}"
     cp "${3}/tmp/ACPI/SSDT-3.aml" "${acpi}"
-
+	echo "$(date +%T): acpi tables copied to $acpi" >> $logfil
     # need to disable optimus
     if [ -e "${3}/tmp/ACPI/SSDT-4.aml" ]
     then
+		echo "$(date +%T): copied acpi table to disable nvidia optimus graphics" >> $logfil
         cp "${3}/tmp/ACPI/SSDT-4.aml" "${acpi}"
     fi
 fi
@@ -103,6 +135,7 @@ if [ -e /private/etc/rc.shutdown.local ]
 then
     rm /private/etc/rc.shutdown.local
     rm /private/etc/rc.local
+	echo "$(date +%T): removed legacy rc scripts in favor of new daemon" >> $logfil
 fi
 
 ## unmount EFI System partition
@@ -112,6 +145,7 @@ efi_mp="/Volumes/EFI"
 	if [ "$efi_mp" = "$efi" ]
 	then
 			diskutil umount $efi_mp
+			echo "$(date +%T): unmounted efi partition for disk $efi_disk" >> $logfil
     fi
 
 ## delete temp files used during installation
@@ -134,5 +168,10 @@ if [ -e $c17 ]
 then
     rm ${c17}
 fi
+echo "$(date +%T): removed clutter from tmp directories" >> $logfil
+
+echo "-------------- DELL SCT Post-Installation End -------------" >> $logfil
+echo "" >> $logfil
+echo "-------------- SCT Package Install Successful -------------" >> $logfil
 
 exit 0

@@ -1,4 +1,7 @@
 #!/bin/bash
+logfil="/Library/Logs/SCT/sct_install_`date +%Y%m%d`.log"
+
+echo "----------- Clover Main Pre-Installation Start ------------" >> $logfil
 
 ##  determine efi partition
 efi=$( df | grep EFI | sed -nE 's/.*% +([-A-F0-9]+)*/\1/p' )
@@ -8,6 +11,7 @@ sbackup="${3}/tmp/temp.plist"
 if [ -e $sbackup ]
 then
     rm "${sbackup}"
+	echo "$(date +%T): found old temp $sbackup for serial tracking, removing" >> $logfil
 fi
 
 ## backup user system and board serials
@@ -16,13 +20,33 @@ config="${efi}/EFI/CLOVER/config.plist"
 if [ -e $config ];
 then
     serial=$( /usr/libexec/PlistBuddy -c "Print SMBIOS:SerialNumber" ${config} )
+    if [ $? -eq 0 ]; then
+    	/usr/libexec/PlistBuddy -c "Add SMBIOS:SerialNumber string $serial" ${sbackup}
+    else
+    	echo "$(date +%T): no serial number to backup" >> $logfil
+    fi
     boardserial=$( /usr/libexec/PlistBuddy -c "Print SMBIOS:BoardSerialNumber" ${config} )
-
-    /usr/libexec/PlistBuddy -c "Add SMBIOS:SerialNumber string $serial" ${sbackup}
-    /usr/libexec/PlistBuddy -c "Add SMBIOS:BoardSerialNumber string $boardserial" ${sbackup}
+    if [ $? -eq 0 ]; then
+    	/usr/libexec/PlistBuddy -c "Add SMBIOS:BoardSerialNumber string $boardserial" ${sbackup}
+    else
+    	echo "$(date +%T): no board serial number to backup" >> $logfil
+    fi
+    rom=$( /usr/libexec/PlistBuddy -c "Print RtVariables:ROM" ${config} )
+	if [ $? -eq 0 ]; then
+		/usr/libexec/PlistBuddy -c "Add RtVariables:ROM data $rom" ${sbackup}
+		echo "$(date +%T): ROM data from config preserved" >> $logfil
+	else
+		echo "$(date +%T): no ROM data to backup" >> $logfil
+	fi
+	
+	if [ ! -z $serial -a ! -z $boardserial ]; then
+		echo "$(date +%T): got serials $serial,$boardserial" >> $logfil
+	fi
 fi
 
 ## call support script to backup clover acpi tables and config for the day
 sh ./clover-backup.sh
 
+echo "------------- Clover Main Pre-Installation End ------------" >> $logfil
+echo "" >> $logfil	
 exit 0

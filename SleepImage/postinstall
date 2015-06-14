@@ -1,8 +1,17 @@
 #!/bin/bash
+logfil="/Library/Logs/SCT/sct_install_`date +%Y%m%d`.log"
+
+echo "----------------- Hibernation Disable Start ---------------" >> $logfil
+
 pmset -a hibernatemode 0
 if [ -f /private/var/vm/sleepimage ]; then
     rm /private/var/vm/sleepimage
+    echo "$(date +%T): sleepimage removed" >> $logfil
 fi
 if [ ! -d /private/var/vm/sleepimage ]; then
     mkdir /private/var/vm/sleepimage
+    echo "$(date +%T): dummy sleepimage folder created to prevent real image" >> $logfil
 fi
+
+echo "------------------ Hibernation Disable End ----------------" >> $logfil
+echo "" >> $logfil	

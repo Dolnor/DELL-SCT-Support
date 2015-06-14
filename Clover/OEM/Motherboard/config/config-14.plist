@@ -173,6 +173,16 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
+				<string>Zero out jne chk for 10.7 and 10.11</string>
+				<key>Name</key>
+				<string>AppleHDA</string>
+				<key>Find</key>
+				<data>gxnUEQ==</data>
+				<key>Replace</key>
+				<data>AAAAAA==</data>
+			</dict>
+			<dict>
+				<key>Comment</key>
 				<string>Zero our jne chk for 10.7 and up</string>
 				<key>Name</key>
 				<string>AppleHDA</string>

@@ -1,19 +1,33 @@
 #!/bin/bash
 
+mkdir -p /Library/Logs/SCT
+logfil="/Library/Logs/SCT/sct_install_`date +%Y%m%d`.log"
+
+echo "-------------- DELL SCT Pre-Installation Start -------------" >> $logfil
+
 ## mount efi partition
+echo "$(date +%T): mounting efi partition" >> $logfil
+
 efi_disk=$( df / | sed -n '2p' | awk '{print $1}' )
+echo "$(date +%T): booted disk is currently $efi_disk" >> $logfil
 efi="${efi_disk%s*}s1"
 efi_mp="/Volumes/EFI"
 efi_chk=$( df | grep EFI | sed -nE 's/.*% +([-A-F0-9]+)*/\1/p' )
 
 	if [ -e $efi_mp ]
 	then
+			echo "$(date +%T): efi map exists, mounting partition to $efi_mp" >> $logfil
 			fsck_msdos $efi
             mount_msdos $efi $efi_mp > /dev/null
 	 else
 			fsck_msdos $efi
             mkdir $efi_mp
+			echo "$(date +%T): efi map created, mounting partition to $efi_mp" >> $logfil
            	mount_msdos $efi $efi_mp > /dev/null
 	 fi
-
+	 
+	 echo "$(date +%T): $efi mounted to mapped $efi_mp" >> $logfil
+	 
+echo "--------------- DELL SCT Pre-Installation End --------------" >> $logfil	
+echo "" >> $logfil	
 exit 0

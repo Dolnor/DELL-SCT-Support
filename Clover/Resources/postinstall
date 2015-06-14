@@ -1,21 +1,30 @@
 #!/bin/bash
-
+logfil="/Library/Logs/SCT/sct_install_`date +%Y%m%d`.log"
+echo "--------------- Clover Main Installation Start --------------" >> $logfil
 ## copy clover main portion to ESP
 efi=$( df | grep EFI | sed -nE 's/.*% +([-A-F0-9]+)*/\1/p' )
 
 cp -R "${3}/tmp/EFI" "${efi}"
 
+echo "$(date +%T): copying main portion of Clover to $efi" >> $logfil
+
 ## set up hibernation
 pmset -a hibernatemode 7
 
+echo "$(date +%T): setting hibernatemode as 7 to allow hibernate (not on-demand!)" >> $logfil
+
 if [ -f /private/var/vm/sleepimage ];
 then
-    rm /private/var/vm/sleepimage
+	rm /private/var/vm/sleepimage
+	echo "$(date +%T): previous sleep image was removed" >> $logfil
 fi
 
 if [ -d /private/var/vm/sleepimage ];
 then
-    rm /private/var/vm/sleepimage
+	rm /private/var/vm/sleepimage
+	echo "$(date +%T): directory preventing sleepimage creation was removed" >> $logfil
 fi
 
+echo "----------------- Clover Main Installation End --------------" >> $logfil
+echo "" >> $logfil	
 exit 0

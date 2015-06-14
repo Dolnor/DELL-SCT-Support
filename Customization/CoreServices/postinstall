@@ -1,3 +1,12 @@
 #!/bin/bash
+logfil="/Library/Logs/SCT/sct_install_`date +%Y%m%d`.log"
+
+echo "------------- Customization Installation Start ------------" >> $logfil
+
 cp "${3}/tmp/com.apple.SystemProfiler.plist" "$HOME/Library/Preferences"
+echo "$(date +%T): customized system profile definitions copied to ~/Library/Preferences/" >> $logfil
 rm "${3}/tmp/com.apple.SystemProfiler.plist"
+echo "$(date +%T): custom system profile definitions removed from tmp" >> $logfil
+
+echo "-------------- Customization Installation End -------------" >> $logfil
+echo "" >> $logfil	

@@ -1,9 +1,17 @@
 #!/bin/bash
+logfil="/Library/Logs/SCT/sct_install_`date +%Y%m%d`.log"
+echo "----------------- Mounter Installation Start ---------------" >> $logfil
 if [ ! -r "$HOME/Desktop/Tools" ];
 then
 	mkdir "$HOME/Desktop/Tools"
+	echo "$(date +%T): tools dir didn't exist, created one" >> $logfil
 	chown "$USER" "$HOME/Desktop/Tools"
+	echo "$(date +%T): owner set to $USER" >> $logfil
 fi
 unzip "${3}/tmp/App/Mounter.zip" -d "${3}/tmp/App/"
+echo "$(date +%T): unzipped Mounter, now copying it to tools" >> $logfil
 cp -Rf "${3}/tmp/App/Mounter.app" "$HOME/Desktop/Tools/"
 chown -R "$USER" "$HOME/Desktop/Tools/Mounter.app"
+
+echo "----------------- Mounter Installation End -----------------" >> $logfil
+echo "" >> $logfil	

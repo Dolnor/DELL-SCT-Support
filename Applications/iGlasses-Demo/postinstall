@@ -1,9 +1,17 @@
 #!/bin/bash
+logfil="/Library/Logs/SCT/sct_install_`date +%Y%m%d`.log"
+echo "---------------- iGlasses Installation Start ---------------" >> $logfil
 if [ ! -r "$HOME/Desktop/Tools" ];
 then
 	mkdir "$HOME/Desktop/Tools"
+	echo "$(date +%T): tools dir didn't exist, created one" >> $logfil
 	chown "$USER" "$HOME/Desktop/Tools"
+	echo "$(date +%T): owner set to $USER" >> $logfil
 fi
 unzip "${3}/tmp/App/iGlasses.zip" -d "${3}/tmp/App/"
+echo "$(date +%T): unzipped iGlasses, now copying it to tools" >> $logfil
 cp -Rf "${3}/tmp/App/iGlasses.app" "$HOME/Desktop/Tools/"
 chown -R "$USER" "$HOME/Desktop/Tools/iGlasses.app"
+
+echo "----------------- iGlasses Installation End ----------------" >> $logfil
+echo "" >> $logfil	
