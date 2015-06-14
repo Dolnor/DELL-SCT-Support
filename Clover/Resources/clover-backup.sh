@@ -40,6 +40,8 @@ then
 	echo "$(date +%T): previous clover folder removed from mapped efi partition" >> $logfil
 fi
 
+mkdir -p "${efi}/EFI/CLOVER/ACPI/patched"
+
 echo "------------------- Clover Data Backup End ------------------" >> $logfil
 
 
